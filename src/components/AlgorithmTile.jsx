@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Box, Heading, Button, Text } from "@chakra-ui/react";
 import SortingChart from "./SortingChart";
 
-const AlgorithmTile = ({ algorithm, steps, isSorted, onSort, loading }) => {
+const AlgorithmTile = ({ algorithm, steps, isSorted, onSort, loading, isSortingAll, hasSortedAll }) => {
   const [clicked, setClicked] = useState(false);
+
+  console.log(`${algorithm} tile: isSortingAll = ${isSortingAll}, hasSortedAll = ${hasSortedAll}`); // Debug prop values
 
   const handleSort = () => {
     setClicked(true);
@@ -22,7 +24,7 @@ const AlgorithmTile = ({ algorithm, steps, isSorted, onSort, loading }) => {
         isLoading={loading}
         loadingText="Sorting..."
         onClick={handleSort}
-        isDisabled={clicked}
+        isDisabled={clicked || isSortingAll || hasSortedAll} // Disable permanently if hasSortedAll
         width="full"
         my={1}
       >

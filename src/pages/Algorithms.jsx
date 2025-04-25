@@ -17,21 +17,10 @@ import {
   shellSort,
   insertionSort,
   heapSort,
+  radixSort,
 } from "../Api";
 import NumberGeneratorForm from "../components/NumberGeneratorForm";
 import AlgorithmTile from "../components/AlgorithmTile";
-
-const validateInputs = (value) => {
-  const parsedValue = parseInt(value);
-
-  if (isNaN(parsedValue)) {
-    return "Please enter a valid number.";
-  }
-  if (parsedValue < 1 || parsedValue > 100) {
-    return "Number of random numbers must be between 1 and 100.";
-  }
-  return null;
-};
 
 export default function Algorithms() {
   const [state, setState] = useState({
@@ -44,6 +33,7 @@ export default function Algorithms() {
     mergeSortTwoSteps: [],
     insertionSortSteps: [],
     heapSortSteps: [],
+    radixSortSteps: [],
     quickSortSorted: false,
     selectionSortSorted: false,
     bubbleSortSorted: false,
@@ -51,8 +41,11 @@ export default function Algorithms() {
     mergeSortTwoSorted: false,
     insertionSortSorted: false,
     heapSortSorted: false,
+    radixSortSorted: false,
     error: null,
     showTiles: false,
+    isSortingAll: false,
+    hasSortedAll: false, 
     loading: {
       generate: false,
       quickSort: false,
@@ -62,12 +55,15 @@ export default function Algorithms() {
       mergeSortTwo: false,
       insertionSort: false,
       heapSort: false,
+      radixSort: false,
     },
   });
 
   const graphRef = useRef(null);
 
-  const updateState = (updates) => setState((prev) => ({ ...prev, ...updates }));
+  const updateState = (updates) => {
+    setState((prev) => ({ ...prev, ...updates }));
+  };
 
   useEffect(() => {
     if (state.showTiles && state.numbers.length > 0 && graphRef.current) {
@@ -87,6 +83,7 @@ export default function Algorithms() {
       insertionSortSteps: [],
       heapSortSteps: [],
       shellSortSteps: [],
+      radixSortSteps: [],
       quickSortSorted: false,
       selectionSortSorted: false,
       bubbleSortSorted: false,
@@ -95,15 +92,11 @@ export default function Algorithms() {
       shellSortSorted: false,
       insertionSortSorted: false,
       heapSortSorted: false,
+      radixSortSorted: false,
       showTiles: false,
+      hasSortedAll: false, 
       loading: { ...state.loading, generate: true },
     });
-
-    const error = validateInputs(value);
-    if (error) {
-      updateState({ error, loading: { ...state.loading, generate: false } });
-      return;
-    }
 
     const payload = {
       value: parseInt(value),
@@ -123,6 +116,7 @@ export default function Algorithms() {
         insertionSortSteps: [numbers],
         shellSortSteps: [numbers],
         heapSortSteps: [numbers],
+        radixSortSteps: [numbers],
         quickSortSorted: false,
         selectionSortSorted: false,
         bubbleSortSorted: false,
@@ -131,6 +125,7 @@ export default function Algorithms() {
         insertionSortSorted: false,
         shellSortSorted: false,
         heapSortSorted: false,
+        radixSortSorted: false,
         showTiles: true,
         loading: { ...state.loading, generate: false },
       });
@@ -152,6 +147,7 @@ export default function Algorithms() {
       "Insertion Sort": { name: "insertionSort", fn: insertionSort },
       "Shell Sort": { name: "shellSort", fn: shellSort },
       "Heap Sort": { name: "heapSort", fn: heapSort },
+      "Radix Sort": { name: "radixSort", fn: radixSort },
     };
 
     const { name, fn } = algorithmMap[algorithm] || {};
@@ -187,6 +183,8 @@ export default function Algorithms() {
   const handleSortAll = async () => {
     updateState({
       error: null,
+      isSortingAll: true,
+      hasSortedAll: true,
       loading: {
         ...state.loading,
         quickSort: true,
@@ -197,6 +195,7 @@ export default function Algorithms() {
         shellSort: true,
         insertionSort: true,
         heapSort: true,
+        radixSort: true,
       },
     });
 
@@ -208,9 +207,10 @@ export default function Algorithms() {
       { name: "bubbleSort", fn: bubbleSort },
       { name: "mergeSort", fn: mergeSort },
       { name: "mergeSortTwo", fn: mergeSortTwo },
-      { name: "shellSort", fn: shellSort},
+      { name: "shellSort", fn: shellSort },
       { name: "insertionSort", fn: insertionSort },
       { name: "heapSort", fn: heapSort },
+      { name: "radixSort", fn: radixSort },
     ];
 
     try {
@@ -237,12 +237,15 @@ export default function Algorithms() {
       });
 
       const lastSteps = results[results.length - 1].steps;
+
       updateState({
         numbers: lastSteps.length > 0 ? lastSteps[lastSteps.length - 1] : state.numbers,
+        isSortingAll: false,
       });
     } catch (err) {
       updateState({
         error: err.message,
+        isSortingAll: false,
         loading: {
           ...state.loading,
           quickSort: false,
@@ -253,6 +256,7 @@ export default function Algorithms() {
           shellSort: false,
           insertionSort: false,
           heapSort: false,
+          radixSort: false,
         },
       });
     }
@@ -286,21 +290,35 @@ export default function Algorithms() {
                 isSorted={state.bubbleSortSorted}
                 onSort={handleSortSingle}
                 loading={state.loading.bubbleSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
               />
-              
               <AlgorithmTile
                 algorithm="Insertion Sort"
                 steps={state.insertionSortSteps}
                 isSorted={state.insertionSortSorted}
                 onSort={handleSortSingle}
                 loading={state.loading.insertionSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
               />
               <AlgorithmTile
                 algorithm="Heap Sort"
                 steps={state.heapSortSteps}
-                isSorted={state.heapSortSteps}
+                isSorted={state.heapSortSorted}
                 onSort={handleSortSingle}
-                loading={state.loading.heapSortSteps}
+                loading={state.loading.heapSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+              />
+              <AlgorithmTile
+                algorithm="Radix Sort"
+                steps={state.radixSortSteps}
+                isSorted={state.radixSortSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.radixSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
               />
               <AlgorithmTile
                 algorithm="Merge Sort"
@@ -308,6 +326,8 @@ export default function Algorithms() {
                 isSorted={state.mergeSortSorted}
                 onSort={handleSortSingle}
                 loading={state.loading.mergeSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
               />
               <AlgorithmTile
                 algorithm="Merge Sort Two"
@@ -315,6 +335,8 @@ export default function Algorithms() {
                 isSorted={state.mergeSortTwoSorted}
                 onSort={handleSortSingle}
                 loading={state.loading.mergeSortTwo}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
               />
               <AlgorithmTile
                 algorithm="Quick Sort"
@@ -322,6 +344,8 @@ export default function Algorithms() {
                 isSorted={state.quickSortSorted}
                 onSort={handleSortSingle}
                 loading={state.loading.quickSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
               />
               <AlgorithmTile
                 algorithm="Shell Sort"
@@ -329,6 +353,8 @@ export default function Algorithms() {
                 isSorted={state.shellSortSorted}
                 onSort={handleSortSingle}
                 loading={state.loading.shellSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
               />
               <AlgorithmTile
                 algorithm="Selection Sort"
@@ -336,6 +362,8 @@ export default function Algorithms() {
                 isSorted={state.selectionSortSorted}
                 onSort={handleSortSingle}
                 loading={state.loading.selectionSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
               />
             </SimpleGrid>
           )}

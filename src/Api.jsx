@@ -49,3 +49,6 @@ export const insertionSort = (payload) =>
 
 export const heapSort = (payload) =>
 	fetchFromApi("/heap-sort", payload, "Failed to sort numbers.");
+
+export const radixSort = (payload) =>
+	fetchFromApi("/radix-sort", payload, "Failed to sort numbers.");
