@@ -43,3 +43,9 @@ export const mergeSortTwo = (payload) =>
 
 export const shellSort = (payload) =>
 	fetchFromApi("/shell-sort", payload, "Failed to sort numbers.");
+
+export const insertionSort = (payload) =>
+	fetchFromApi("/insertion-sort", payload, "Failed to sort numbers.");
+
+export const heapSort = (payload) =>
+	fetchFromApi("/heap-sort", payload, "Failed to sort numbers.");

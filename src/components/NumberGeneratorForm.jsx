@@ -1,58 +1,56 @@
+import React, { useState } from "react";
+
 import {
-	Button,
-	FormControl,
-	FormLabel,
-	Input,
-	VStack,
-} from "@chakra-ui/react";
-
-const NumberGeneratorForm = ({
-	value,
-	maxRange,
-	loading,
-	onValueChange,
-	onMaxRangeChange,
-	onSubmit,
-}) => {
-	const handleFormSubmit = (e) => {
-		console.log("Form submitted"); // Debug log
-		onSubmit(e);
-	};
-
-	return (
-		<form onSubmit={handleFormSubmit}>
-			<VStack spacing={4} align="stretch">
-				<FormControl>
-					<FormLabel>Number of Random Numbers</FormLabel>
-					<Input
-						type="number"
-						value={value}
-						onChange={onValueChange}
-						placeholder="Enter a number (0-100)"
-						isDisabled={loading}
-					/>
-				</FormControl>
-				<FormControl>
-					<FormLabel>Maximum Range</FormLabel>
-					<Input
-						type="number"
-						value={maxRange}
-						onChange={onMaxRangeChange}
-						placeholder="Enter maximum range"
-						isDisabled={loading}
-					/>
-				</FormControl>
-				<Button
-					type="submit"
-					colorScheme="blue"
-					isLoading={loading}
-					loadingText="Generating..."
-				>
-					Generate Numbers
-				</Button>
-			</VStack>
-		</form>
-	);
-};
-
-export default NumberGeneratorForm;
+    Button,
+    FormControl,
+    VStack,
+    Slider,
+    SliderTrack,
+    SliderFilledTrack,
+    SliderThumb,
+  } from "@chakra-ui/react";
+  
+  const NumberGeneratorForm = ({
+    value,
+    loading,
+    onValueChange,
+    onSubmit,
+  }) => {
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+    const handleFormSubmit = (e) => {
+      e.preventDefault();
+      setIsButtonDisabled(true);
+      onSubmit(e, value);
+    };
+  
+    return (
+      <form onSubmit={handleFormSubmit}>
+        <VStack spacing={4} align="stretch">
+          <FormControl>
+            <Slider
+              value={value}
+              onChange={onValueChange}
+              min={1}
+              max={100}
+              step={1}
+              isDisabled={loading}>
+              <SliderTrack>
+                <SliderFilledTrack />
+              </SliderTrack>
+              <SliderThumb />
+            </Slider>
+          </FormControl>
+          <Button
+            type="submit"
+            colorScheme="blue"
+            isLoading={loading}
+            loadingText="Generating..."
+          >
+            Generate Numbers
+          </Button>
+        </VStack>
+      </form>
+    );
+  };
+  
+  export default NumberGeneratorForm;
