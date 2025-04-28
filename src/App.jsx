@@ -1,51 +1,39 @@
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import theme from "./theme";
 import NavBar from "./components/NavBar";
 import Algorithms from "./pages/Algorithms";
+import Pancake from "./pages/Pancake";
+import Intro from "./pages/Intro";
+import Tim from "./pages/Tim";
+import Radix from "./pages/Radix";
 import Bubble from "./pages/Bubble";
 import Heap from "./pages/Heap";
-import Radix from "./pages/Radix";
 import Insertion from "./pages/Insertion";
 import Merge from "./pages/Merge";
 import Quick from "./pages/Quick";
 import Selection from "./pages/Selection";
-import Shell from "./pages/Shell";
-import Pancake from "./pages/Pancake";
-import Tim from "./pages/Tim";
-import IntroSort from "./pages/Intro";
-import theme from "./theme";
-
-function Layout() {
-  return (
-    <>
-      <NavBar />
-      <Outlet />
-    </>
-  );
-}
+import Shell from "./pages/Shell"
 
 export default function App() {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
+        <NavBar />
         <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Algorithms />} />
-            <Route path="/bubble" element={<Bubble />} />
-            <Route path="/heap" element={<Heap />} />
-            <Route path="/radix" element={<Radix />} />
-            <Route path="/insertion" element={<Insertion />} />
-            <Route path="/merge" element={<Merge />} />
-            {/* <Route path="/merge-two" element={<MergeTwo />} /> */}
-            <Route path="/quick" element={<Quick />} />
-            <Route path="/selection" element={<Selection />} />
-            <Route path="/shell" element={<Shell />} />
-            <Route path="/pancake" element={<Pancake />} />
-            <Route path="/tim" element={<Tim />} />
-            <Route path="/intro-sort" element={<IntroSort />} />
-            <Route path="/intro" element={<Algorithms />} /> {/* Adjust if Intro has a dedicated page */}
-          </Route>
+          <Route path="/" element={<Algorithms />} />
+          <Route path="/algorithms" element={<Algorithms />} />
+          <Route path="/bubble" element={<Bubble />} />
+          <Route path="/heap" element={<Heap />} />
+          <Route path="/radix" element={<Radix/>} />
+          <Route path="/insertion" element={<Insertion />} />
+          <Route path="/merge" element={<Merge />} />
+          <Route path="/quick" element={<Quick/>} />
+          <Route path="/selection" element={<Selection />} />
+          <Route path="/shell" element={<Shell />} />
+          <Route path="/pancake" element={<Pancake />} />
+          <Route path="/intro" element={<Intro />} />
+          <Route path="/tim" element={<Tim />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

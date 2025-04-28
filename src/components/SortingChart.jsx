@@ -8,7 +8,7 @@ import {
 } from "recharts";
 import { Box } from "@chakra-ui/react";
 
-const SortingChart = ({ steps, algorithm, isSorted }) => {
+const SortingChart = ({ steps, algorithm, isSorted, hgt }) => {
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const SortingChart = ({ steps, algorithm, isSorted }) => {
 
   return (
     <Box mt={4}>
-      <ResponsiveContainer width="100%" height={200}>
+      <ResponsiveContainer width="100%" height={hgt}>
         <BarChart data={data} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />

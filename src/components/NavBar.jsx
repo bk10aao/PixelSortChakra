@@ -8,21 +8,22 @@ const NavBar = () => {
   const activeLinkColor = useColorModeValue("teal.500", "teal.300");
 
   const navLinks = [
-    { name: "Intro", path: "/intro" },
+    { name: "All", path: "/"},
     { name: "Bubble", path: "/bubble" },
     { name: "Heap", path: "/heap" },
-    { name: "Radix", path: "/radix" },
     { name: "Insertion", path: "/insertion" },
+    { name: "Intro", path: "/intro" },
     { name: "Merge", path: "/merge" },
+    { name: "Pancake", path: "/pancake" },
     { name: "Quick", path: "/quick" },
+    { name: "Radix", path: "/radix" },
     { name: "Selection", path: "/selection" },
     { name: "Shell", path: "/shell" },
-    { name: "Pancake", path: "/pancake" },
     { name: "Tim", path: "/tim" },
   ];
 
   return (
-    <Box bg={bgColor} px={4} py={2} position="fixed" top={0} width="100%" zIndex={10}>
+    <Box bg={bgColor} px={4} py={2} top={0} width="100%" zIndex={10}>
       <Flex align="center" justify="space-between" maxW="1440px" mx="auto">
         <Flex display={{ base: "none", md: "flex" }} align="center">
           {navLinks.map((link) => (

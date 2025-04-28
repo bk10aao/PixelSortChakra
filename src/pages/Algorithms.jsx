@@ -318,7 +318,7 @@ export default function Algorithms() {
             <SimpleGrid
               ref={graphRef}
               columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
-              spacing={6}
+              spacing={4}
             >
               <AlgorithmTile
                 algorithm="Bubble Sort"
@@ -328,15 +328,7 @@ export default function Algorithms() {
                 loading={state.loading.bubbleSort}
                 isSortingAll={state.isSortingAll}
                 hasSortedAll={state.hasSortedAll}
-              />
-              <AlgorithmTile
-                algorithm="Insertion Sort"
-                steps={state.insertionSortSteps}
-                isSorted={state.insertionSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.insertionSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
+                height={150}
               />
               <AlgorithmTile
                 algorithm="Heap Sort"
@@ -346,78 +338,17 @@ export default function Algorithms() {
                 loading={state.loading.heapSort}
                 isSortingAll={state.isSortingAll}
                 hasSortedAll={state.hasSortedAll}
+                height={150}
               />
               <AlgorithmTile
-                algorithm="Radix Sort"
-                steps={state.radixSortSteps}
-                isSorted={state.radixSortSorted}
+                algorithm="Insertion Sort"
+                steps={state.insertionSortSteps}
+                isSorted={state.insertionSortSorted}
                 onSort={handleSortSingle}
-                loading={state.loading.radixSort}
+                loading={state.loading.insertionSort}
                 isSortingAll={state.isSortingAll}
                 hasSortedAll={state.hasSortedAll}
-              />
-              <AlgorithmTile
-                algorithm="Merge Sort"
-                steps={state.mergeSortSteps}
-                isSorted={state.mergeSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.mergeSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-              />
-              <AlgorithmTile
-                algorithm="Merge Sort Two"
-                steps={state.mergeSortTwoSteps}
-                isSorted={state.mergeSortTwoSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.mergeSortTwo}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-              />
-              <AlgorithmTile
-                algorithm="Quick Sort"
-                steps={state.quickSortSteps}
-                isSorted={state.quickSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.quickSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-              />
-              <AlgorithmTile
-                algorithm="Shell Sort"
-                steps={state.shellSortSteps}
-                isSorted={state.shellSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.shellSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-              />
-              <AlgorithmTile
-                algorithm="Selection Sort"
-                steps={state.selectionSortSteps}
-                isSorted={state.selectionSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.selectionSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-              />
-              <AlgorithmTile
-                algorithm="Pancake Sort"
-                steps={state.pancakeSortSteps}
-                isSorted={state.pancakeSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.pancakeSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-              />
-              <AlgorithmTile
-                algorithm="Tim Sort"
-                steps={state.timSortSteps}
-                isSorted={state.timSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.timSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
+                height={150}
               />
               <AlgorithmTile
                 algorithm="Intro Sort"
@@ -427,6 +358,87 @@ export default function Algorithms() {
                 loading={state.loading.introSort}
                 isSortingAll={state.isSortingAll}
                 hasSortedAll={state.hasSortedAll}
+                height={150}
+              />
+              <AlgorithmTile
+                algorithm="Merge Sort"
+                steps={state.mergeSortSteps}
+                isSorted={state.mergeSortSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.mergeSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+                height={150}
+              />
+              <AlgorithmTile
+                algorithm="Merge Sort Two"
+                steps={state.mergeSortTwoSteps}
+                isSorted={state.mergeSortTwoSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.mergeSortTwo}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+                height={150}
+              />
+              <AlgorithmTile
+                algorithm="Pancake Sort"
+                steps={state.pancakeSortSteps}
+                isSorted={state.pancakeSortSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.pancakeSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+                height={150}
+              />
+              <AlgorithmTile
+                algorithm="Quick Sort"
+                steps={state.quickSortSteps}
+                isSorted={state.quickSortSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.quickSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+                height={150}
+              />
+              <AlgorithmTile
+                algorithm="Radix Sort"
+                steps={state.radixSortSteps}
+                isSorted={state.radixSortSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.radixSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+                height={150}
+              />
+              <AlgorithmTile
+                algorithm="Selection Sort"
+                steps={state.selectionSortSteps}
+                isSorted={state.selectionSortSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.selectionSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+                height={150}
+              />
+              <AlgorithmTile
+                algorithm="Shell Sort"
+                steps={state.shellSortSteps}
+                isSorted={state.shellSortSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.shellSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+                height={150}
+              />
+              <AlgorithmTile
+                algorithm="Tim Sort"
+                steps={state.timSortSteps}
+                isSorted={state.timSortSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.timSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+                height={150}
               />
             </SimpleGrid>
           )}
