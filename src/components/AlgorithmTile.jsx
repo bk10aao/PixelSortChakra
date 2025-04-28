@@ -5,8 +5,6 @@ import SortingChart from "./SortingChart";
 const AlgorithmTile = ({ algorithm, steps, isSorted, onSort, loading, isSortingAll, hasSortedAll }) => {
   const [clicked, setClicked] = useState(false);
 
-  console.log(`${algorithm} tile: isSortingAll = ${isSortingAll}, hasSortedAll = ${hasSortedAll}`); // Debug prop values
-
   const handleSort = () => {
     setClicked(true);
     onSort(algorithm);
