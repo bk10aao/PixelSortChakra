@@ -18,6 +18,9 @@ import {
   insertionSort,
   heapSort,
   radixSort,
+  pancakeSort,
+  timSort,
+  introSort,
 } from "../Api";
 import NumberGeneratorForm from "../components/NumberGeneratorForm";
 import AlgorithmTile from "../components/AlgorithmTile";
@@ -34,6 +37,9 @@ export default function Algorithms() {
     insertionSortSteps: [],
     heapSortSteps: [],
     radixSortSteps: [],
+    pancakeSortSteps: [],
+    timSortSteps: [],
+    introSortSteps: [],
     quickSortSorted: false,
     selectionSortSorted: false,
     bubbleSortSorted: false,
@@ -42,6 +48,9 @@ export default function Algorithms() {
     insertionSortSorted: false,
     heapSortSorted: false,
     radixSortSorted: false,
+    pancakeSortSorted: false,
+    timSortSorted: false,
+    introSortSorted: false,
     error: null,
     showTiles: false,
     isSortingAll: false,
@@ -56,6 +65,9 @@ export default function Algorithms() {
       insertionSort: false,
       heapSort: false,
       radixSort: false,
+      pancakeSort: false,
+      timSort: false,
+      introSort: false,
     },
   });
 
@@ -84,6 +96,9 @@ export default function Algorithms() {
       heapSortSteps: [],
       shellSortSteps: [],
       radixSortSteps: [],
+      pancakeSortSteps: [],
+      timSortSteps: [],
+      introSortSteps: [],
       quickSortSorted: false,
       selectionSortSorted: false,
       bubbleSortSorted: false,
@@ -93,6 +108,9 @@ export default function Algorithms() {
       insertionSortSorted: false,
       heapSortSorted: false,
       radixSortSorted: false,
+      pancakeSortSorted: false,
+      timSortSorted: false,
+      introSortSorted: false,
       showTiles: false,
       hasSortedAll: false, 
       loading: { ...state.loading, generate: true },
@@ -117,6 +135,9 @@ export default function Algorithms() {
         shellSortSteps: [numbers],
         heapSortSteps: [numbers],
         radixSortSteps: [numbers],
+        pancakeSortSteps: [numbers],
+        timSortSteps: [numbers],
+        introSortSteps: [numbers],
         quickSortSorted: false,
         selectionSortSorted: false,
         bubbleSortSorted: false,
@@ -126,6 +147,9 @@ export default function Algorithms() {
         shellSortSorted: false,
         heapSortSorted: false,
         radixSortSorted: false,
+        pancakeSortSorted: false,
+        timSortSorted: false,
+        introSortSorted: false,
         showTiles: true,
         loading: { ...state.loading, generate: false },
       });
@@ -148,6 +172,9 @@ export default function Algorithms() {
       "Shell Sort": { name: "shellSort", fn: shellSort },
       "Heap Sort": { name: "heapSort", fn: heapSort },
       "Radix Sort": { name: "radixSort", fn: radixSort },
+      "Pancake Sort": { name: "pancakeSort", fn: pancakeSort },
+      "Tim Sort": { name: "timSort", fn: timSort },
+      "intro Sort": { name: "introSort", fn: introSort },
     };
 
     const { name, fn } = algorithmMap[algorithm] || {};
@@ -196,6 +223,9 @@ export default function Algorithms() {
         insertionSort: true,
         heapSort: true,
         radixSort: true,
+        pancakeSort: true,
+        timSort: true,
+        introSort: true,
       },
     });
 
@@ -211,6 +241,9 @@ export default function Algorithms() {
       { name: "insertionSort", fn: insertionSort },
       { name: "heapSort", fn: heapSort },
       { name: "radixSort", fn: radixSort },
+      { name: "pancakeSort", fn: pancakeSort },
+      { name: "timSort", fn: timSort },
+      { name: "introSort", fn: introSort },
     ];
 
     try {
@@ -257,6 +290,9 @@ export default function Algorithms() {
           insertionSort: false,
           heapSort: false,
           radixSort: false,
+          pancakeSort: false,
+          timSort: false,
+          introSort: false,
         },
       });
     }
@@ -362,6 +398,33 @@ export default function Algorithms() {
                 isSorted={state.selectionSortSorted}
                 onSort={handleSortSingle}
                 loading={state.loading.selectionSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+              />
+              <AlgorithmTile
+                algorithm="Pancake Sort"
+                steps={state.pancakeSortSteps}
+                isSorted={state.pancakeSortSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.pancakeSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+              />
+              <AlgorithmTile
+                algorithm="Tim Sort"
+                steps={state.timSortSteps}
+                isSorted={state.timSortSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.timSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+              />
+              <AlgorithmTile
+                algorithm="Intro Sort"
+                steps={state.insertionSortSteps}
+                isSorted={state.insertionSortSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.introSort}
                 isSortingAll={state.isSortingAll}
                 hasSortedAll={state.hasSortedAll}
               />

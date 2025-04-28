@@ -52,3 +52,12 @@ export const heapSort = (payload) =>
 
 export const radixSort = (payload) =>
 	fetchFromApi("/radix-sort", payload, "Failed to sort numbers.");
+
+export const pancakeSort = (payload) =>
+	fetchFromApi("/pancake-sort", payload, "Failed to sort numbers.");
+
+export const timSort = (payload) =>
+	fetchFromApi("/tim-sort", payload, "Failed to sort numbers.");
+
+export const introSort = (payload) =>
+	fetchFromApi("/intro-sort", payload, "Failed to sort numbers.");
