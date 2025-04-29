@@ -136,9 +136,6 @@ export default function MergeSortComparisonPage() {
         <>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8} ref={graphRef}>
             <Box>
-              <Heading as="h2" size="md" mb={4}>
-                Merge Sort
-              </Heading>
               <AlgorithmComparison
                 algorithm="Merge Sort"
                 steps={state.mergeSortSteps}
@@ -150,9 +147,6 @@ export default function MergeSortComparisonPage() {
               />
             </Box>
             <Box>
-              <Heading as="h2" size="md" mb={4}>
-                Merge Sort Two
-              </Heading>
               <AlgorithmComparison
                 algorithm="Merge Sort Two"
                 steps={state.mergeSortTwoSteps}

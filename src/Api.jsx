@@ -50,8 +50,11 @@ export const insertionSort = (payload) =>
 export const heapSort = (payload) =>
 	fetchFromApi("/heap-sort", payload, "Failed to sort numbers.");
 
-export const radixSort = (payload) =>
-	fetchFromApi("/radix-sort", payload, "Failed to sort numbers.");
+export const radixSortLSD = (payload) =>
+	fetchFromApi("/radix-sort-lsd", payload, "Failed to sort numbers.");
+
+export const radixSortMSD = (payload) =>
+	fetchFromApi("/radix-sort-msd", payload, "Failed to sort numbers.");
 
 export const pancakeSort = (payload) =>
 	fetchFromApi("/pancake-sort", payload, "Failed to sort numbers.");

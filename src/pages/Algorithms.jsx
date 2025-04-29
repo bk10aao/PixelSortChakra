@@ -17,7 +17,8 @@ import {
   shellSort,
   insertionSort,
   heapSort,
-  radixSort,
+  radixSortLSD,
+  radixSortMSD,
   pancakeSort,
   timSort,
   introSort,
@@ -36,7 +37,8 @@ export default function Algorithms() {
     mergeSortTwoSteps: [],
     insertionSortSteps: [],
     heapSortSteps: [],
-    radixSortSteps: [],
+    radixSortLSDSteps: [],
+    radixSortMSDSteps: [],
     pancakeSortSteps: [],
     timSortSteps: [],
     introSortSteps: [],
@@ -47,7 +49,8 @@ export default function Algorithms() {
     mergeSortTwoSorted: false,
     insertionSortSorted: false,
     heapSortSorted: false,
-    radixSortSorted: false,
+    radixSortLSDSorted: false,
+    radixSortMSDSorted: false,
     pancakeSortSorted: false,
     timSortSorted: false,
     introSortSorted: false,
@@ -64,7 +67,8 @@ export default function Algorithms() {
       mergeSortTwo: false,
       insertionSort: false,
       heapSort: false,
-      radixSort: false,
+      radixSortLSD: false,
+      radixSortMSD: false,
       pancakeSort: false,
       timSort: false,
       introSort: false,
@@ -95,7 +99,8 @@ export default function Algorithms() {
       insertionSortSteps: [],
       heapSortSteps: [],
       shellSortSteps: [],
-      radixSortSteps: [],
+      radixSortLSDSteps: [],
+      radixSortMSDSteps: [],
       pancakeSortSteps: [],
       timSortSteps: [],
       introSortSteps: [],
@@ -107,7 +112,8 @@ export default function Algorithms() {
       shellSortSorted: false,
       insertionSortSorted: false,
       heapSortSorted: false,
-      radixSortSorted: false,
+      radixSortLSDSorted: false,
+      radixSortMSDSorted: false,
       pancakeSortSorted: false,
       timSortSorted: false,
       introSortSorted: false,
@@ -134,7 +140,8 @@ export default function Algorithms() {
         insertionSortSteps: [numbers],
         shellSortSteps: [numbers],
         heapSortSteps: [numbers],
-        radixSortSteps: [numbers],
+        radixSortLSDSteps: [numbers],
+        radixSortMSDSteps: [numbers],
         pancakeSortSteps: [numbers],
         timSortSteps: [numbers],
         introSortSteps: [numbers],
@@ -146,7 +153,8 @@ export default function Algorithms() {
         insertionSortSorted: false,
         shellSortSorted: false,
         heapSortSorted: false,
-        radixSortSorted: false,
+        radixSortLSDSorted: false,
+        radixSortMSDSorted: false,
         pancakeSortSorted: false,
         timSortSorted: false,
         introSortSorted: false,
@@ -171,7 +179,8 @@ export default function Algorithms() {
       "Insertion Sort": { name: "insertionSort", fn: insertionSort },
       "Shell Sort": { name: "shellSort", fn: shellSort },
       "Heap Sort": { name: "heapSort", fn: heapSort },
-      "Radix Sort": { name: "radixSort", fn: radixSort },
+      "Radix Sort LSD": { name: "radixSortLSD", fn: radixSortLSD },
+      "Radix Sort MSD": { name: "radixSortMSD", fn: radixSortMSD },
       "Pancake Sort": { name: "pancakeSort", fn: pancakeSort },
       "Tim Sort": { name: "timSort", fn: timSort },
       "intro Sort": { name: "introSort", fn: introSort },
@@ -222,7 +231,8 @@ export default function Algorithms() {
         shellSort: true,
         insertionSort: true,
         heapSort: true,
-        radixSort: true,
+        radixSortLSD: true,
+        radixSortMSD: true,
         pancakeSort: true,
         timSort: true,
         introSort: true,
@@ -240,7 +250,8 @@ export default function Algorithms() {
       { name: "shellSort", fn: shellSort },
       { name: "insertionSort", fn: insertionSort },
       { name: "heapSort", fn: heapSort },
-      { name: "radixSort", fn: radixSort },
+      { name: "radixSortLSD", fn: radixSortLSD },
+      { name: "radixSortMSD", fn: radixSortMSD },
       { name: "pancakeSort", fn: pancakeSort },
       { name: "timSort", fn: timSort },
       { name: "introSort", fn: introSort },
@@ -289,7 +300,8 @@ export default function Algorithms() {
           shellSort: false,
           insertionSort: false,
           heapSort: false,
-          radixSort: false,
+          radixSortLSD: false,
+          radixSortMSD: false,
           pancakeSort: false,
           timSort: false,
           introSort: false,
@@ -401,11 +413,21 @@ export default function Algorithms() {
                 height={150}
               />
               <AlgorithmTile
-                algorithm="Radix Sort"
-                steps={state.radixSortSteps}
-                isSorted={state.radixSortSorted}
+                algorithm="Radix Sort LSD"
+                steps={state.radixSortLSDSteps}
+                isSorted={state.radixSortLSDSorted}
                 onSort={handleSortSingle}
-                loading={state.loading.radixSort}
+                loading={state.loading.radixSortLSD}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+                height={150}
+              />
+              <AlgorithmTile
+                algorithm="Radix Sort MSD"
+                steps={state.radixSortMSDSteps}
+                isSorted={state.radixSortMSDSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.radixSortMSD}
                 isSortingAll={state.isSortingAll}
                 hasSortedAll={state.hasSortedAll}
                 height={150}
