@@ -64,3 +64,6 @@ export const timSort = (payload) =>
 
 export const introSort = (payload) =>
 	fetchFromApi("/intro-sort", payload, "Failed to sort numbers.");
+
+export const inplaceMergeSort = (payload) =>
+	fetchFromApi("/in-place-merge-sort", payload, "Failed to sort numbers.");

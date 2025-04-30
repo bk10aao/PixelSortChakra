@@ -22,6 +22,7 @@ import {
   pancakeSort,
   timSort,
   introSort,
+  inplaceMergeSort,
 } from "../Api";
 import NumberGeneratorForm from "../components/NumberGeneratorForm";
 import AlgorithmTile from "../components/AlgorithmTile";
@@ -42,6 +43,7 @@ export default function Algorithms() {
     pancakeSortSteps: [],
     timSortSteps: [],
     introSortSteps: [],
+    inplaceMergeSortSteps: [],
     quickSortSorted: false,
     selectionSortSorted: false,
     bubbleSortSorted: false,
@@ -54,6 +56,7 @@ export default function Algorithms() {
     pancakeSortSorted: false,
     timSortSorted: false,
     introSortSorted: false,
+    inplaceMergeSorted: false,
     error: null,
     showTiles: false,
     isSortingAll: false,
@@ -72,6 +75,7 @@ export default function Algorithms() {
       pancakeSort: false,
       timSort: false,
       introSort: false,
+      inplaceMergeSort: false,
     },
   });
 
@@ -104,6 +108,7 @@ export default function Algorithms() {
       pancakeSortSteps: [],
       timSortSteps: [],
       introSortSteps: [],
+      inplaceMergeSortSteps: [],
       quickSortSorted: false,
       selectionSortSorted: false,
       bubbleSortSorted: false,
@@ -117,6 +122,7 @@ export default function Algorithms() {
       pancakeSortSorted: false,
       timSortSorted: false,
       introSortSorted: false,
+      inplaceMergeSortSorted: false,
       showTiles: false,
       hasSortedAll: false, 
       loading: { ...state.loading, generate: true },
@@ -145,6 +151,7 @@ export default function Algorithms() {
         pancakeSortSteps: [numbers],
         timSortSteps: [numbers],
         introSortSteps: [numbers],
+        inplaceMergeSortSteps: [numbers],
         quickSortSorted: false,
         selectionSortSorted: false,
         bubbleSortSorted: false,
@@ -158,6 +165,7 @@ export default function Algorithms() {
         pancakeSortSorted: false,
         timSortSorted: false,
         introSortSorted: false,
+        inplaceMergeSortSorted: false,
         showTiles: true,
         loading: { ...state.loading, generate: false },
       });
@@ -183,7 +191,8 @@ export default function Algorithms() {
       "Radix Sort MSD": { name: "radixSortMSD", fn: radixSortMSD },
       "Pancake Sort": { name: "pancakeSort", fn: pancakeSort },
       "Tim Sort": { name: "timSort", fn: timSort },
-      "intro Sort": { name: "introSort", fn: introSort },
+      "Intro Sort": { name: "introSort", fn: introSort },
+      "Inplace Merge Sort": { name: "inplaceMergeSort", fn: inplaceMergeSort}
     };
 
     const { name, fn } = algorithmMap[algorithm] || {};
@@ -236,6 +245,7 @@ export default function Algorithms() {
         pancakeSort: true,
         timSort: true,
         introSort: true,
+        inplaceMergeSort: true,
       },
     });
 
@@ -255,6 +265,7 @@ export default function Algorithms() {
       { name: "pancakeSort", fn: pancakeSort },
       { name: "timSort", fn: timSort },
       { name: "introSort", fn: introSort },
+      { name: "inplaceMergeSort", fn: inplaceMergeSort },
     ];
 
     try {
@@ -305,6 +316,7 @@ export default function Algorithms() {
           pancakeSort: false,
           timSort: false,
           introSort: false,
+          inplaceMergeSort: false,
         },
       });
     }
@@ -458,6 +470,16 @@ export default function Algorithms() {
                 isSorted={state.timSortSorted}
                 onSort={handleSortSingle}
                 loading={state.loading.timSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+                height={150}
+              />
+              <AlgorithmTile
+                algorithm="Inplace Merge Sort"
+                steps={state.inplaceMergeSortSteps}
+                isSorted={state.inplaceMergeSortSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.inplaceMergeSort}
                 isSortingAll={state.isSortingAll}
                 hasSortedAll={state.hasSortedAll}
                 height={150}
