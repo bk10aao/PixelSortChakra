@@ -27,6 +27,7 @@ const AlgorithmTile = ({ algorithm, steps, isSorted, onSort, loading, isSortingA
         width="full"
         my={1}
         paddingLeft={0}
+        paddingRight={0}
         marginTop={1}
       >
         Sort

@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Alert, AlertIcon, Box } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, Center, Heading } from "@chakra-ui/react";
 import NumberGeneratorForm from "./NumberGeneratorForm";
 import AlgorithmTile from "./AlgorithmTile";
 import { generateNumbers } from "../Api";
@@ -80,7 +80,10 @@ export default function SortPage({ algorithmName, sortFunction }) {
   };
 
   return (
-    <Box padding pt={{ base: "80px", md: "60px" }} mx="auto">
+    <Box p={6} pt={{ base: "80px", md: "60px" }} mx="auto">
+      <Center>
+        <Heading>{algorithmName}</Heading>
+      </Center>
       <NumberGeneratorForm
         value={state.value}
         loading={state.loading.generate}
@@ -96,16 +99,7 @@ export default function SortPage({ algorithmName, sortFunction }) {
             </Alert>
           )}
           {state.showTiles && (
-            <Box
-              ref={graphRef}
-              w="100vw"
-              h="100vh"
-              paddingTop={5}
-              
-              paddingRight={5}
-            >
               <AlgorithmTile
-                algorithm={algorithmName}
                 steps={state.sortSteps}
                 isSorted={state.isSorted}
                 onSort={handleSort}
@@ -114,7 +108,6 @@ export default function SortPage({ algorithmName, sortFunction }) {
                 hasSortedAll={false}
                 height={400}
               />
-            </Box>
           )}
         </>
       )}

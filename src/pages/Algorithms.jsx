@@ -12,8 +12,8 @@ import {
   quickSort,
   selectionSort,
   bubbleSort,
-  mergeSort,
-  mergeSortTwo,
+  mergeSortBottomUp,
+  mergeSortTopDown,
   shellSort,
   insertionSort,
   heapSort,
@@ -33,8 +33,8 @@ export default function Algorithms() {
     quickSortSteps: [],
     selectionSortSteps: [],
     bubbleSortSteps: [],
-    mergeSortSteps: [],
-    mergeSortTwoSteps: [],
+    mergeSortBottomUpSteps: [],
+    mergeSortTopDownSteps: [],
     insertionSortSteps: [],
     heapSortSteps: [],
     radixSortLSDSteps: [],
@@ -45,8 +45,8 @@ export default function Algorithms() {
     quickSortSorted: false,
     selectionSortSorted: false,
     bubbleSortSorted: false,
-    mergeSortSorted: false,
-    mergeSortTwoSorted: false,
+    mergeSortBottomUpSorted: false,
+    mergeSortTopDownSorted: false,
     insertionSortSorted: false,
     heapSortSorted: false,
     radixSortLSDSorted: false,
@@ -63,8 +63,8 @@ export default function Algorithms() {
       quickSort: false,
       selectionSort: false,
       bubbleSort: false,
-      mergeSort: false,
-      mergeSortTwo: false,
+      mergeSortBottomUp: false,
+      mergeSortTopDown: false,
       insertionSort: false,
       heapSort: false,
       radixSortLSD: false,
@@ -94,8 +94,8 @@ export default function Algorithms() {
       quickSortSteps: [],
       selectionSortSteps: [],
       bubbleSortSteps: [],
-      mergeSortSteps: [],
-      mergeSortTwoSteps: [],
+      mergeSortBottomUpSteps: [],
+      mergeSortTopDownSteps: [],
       insertionSortSteps: [],
       heapSortSteps: [],
       shellSortSteps: [],
@@ -107,8 +107,8 @@ export default function Algorithms() {
       quickSortSorted: false,
       selectionSortSorted: false,
       bubbleSortSorted: false,
-      mergeSortSorted: false,
-      mergeSortTwoSorted: false,
+      mergeSortBottomUpSorted: false,
+      mergeSortTopDownSorted: false,
       shellSortSorted: false,
       insertionSortSorted: false,
       heapSortSorted: false,
@@ -135,8 +135,8 @@ export default function Algorithms() {
         quickSortSteps: [numbers],
         selectionSortSteps: [numbers],
         bubbleSortSteps: [numbers],
-        mergeSortSteps: [numbers],
-        mergeSortTwoSteps: [numbers],
+        mergeSortBottomUpSteps: [numbers],
+        mergeSortTopDownSteps: [numbers],
         insertionSortSteps: [numbers],
         shellSortSteps: [numbers],
         heapSortSteps: [numbers],
@@ -148,8 +148,8 @@ export default function Algorithms() {
         quickSortSorted: false,
         selectionSortSorted: false,
         bubbleSortSorted: false,
-        mergeSortSorted: false,
-        mergeSortTwoSorted: false,
+        mergeSortBottomUpSorted: false,
+        mergeSortTopDownSorted: false,
         insertionSortSorted: false,
         shellSortSorted: false,
         heapSortSorted: false,
@@ -174,8 +174,8 @@ export default function Algorithms() {
       "Quick Sort": { name: "quickSort", fn: quickSort },
       "Selection Sort": { name: "selectionSort", fn: selectionSort },
       "Bubble Sort": { name: "bubbleSort", fn: bubbleSort },
-      "Merge Sort": { name: "mergeSort", fn: mergeSort },
-      "Merge Sort Two": { name: "mergeSortTwo", fn: mergeSortTwo },
+      "Merge Sort Bottom Up": { name: "mergeSortBottomUp", fn: mergeSortBottomUp },
+      "Merge Sort Two": { name: "mergeSortTopDown", fn: mergeSortTopDown },
       "Insertion Sort": { name: "insertionSort", fn: insertionSort },
       "Shell Sort": { name: "shellSort", fn: shellSort },
       "Heap Sort": { name: "heapSort", fn: heapSort },
@@ -226,8 +226,8 @@ export default function Algorithms() {
         quickSort: true,
         selectionSort: true,
         bubbleSort: true,
-        mergeSort: true,
-        mergeSortTwo: true,
+        mergeSortBottomUp: true,
+        mergeSortTopDown: true,
         shellSort: true,
         insertionSort: true,
         heapSort: true,
@@ -245,8 +245,8 @@ export default function Algorithms() {
       { name: "quickSort", fn: quickSort },
       { name: "selectionSort", fn: selectionSort },
       { name: "bubbleSort", fn: bubbleSort },
-      { name: "mergeSort", fn: mergeSort },
-      { name: "mergeSortTwo", fn: mergeSortTwo },
+      { name: "mergeSortBottomUp", fn: mergeSortBottomUp },
+      { name: "mergeSortTopDown", fn: mergeSortTopDown },
       { name: "shellSort", fn: shellSort },
       { name: "insertionSort", fn: insertionSort },
       { name: "heapSort", fn: heapSort },
@@ -295,8 +295,8 @@ export default function Algorithms() {
           quickSort: false,
           selectionSort: false,
           bubbleSort: false,
-          mergeSort: false,
-          mergeSortTwo: false,
+          mergeSortBottomUp: false,
+          mergeSortTopDown: false,
           shellSort: false,
           insertionSort: false,
           heapSort: false,
@@ -373,21 +373,21 @@ export default function Algorithms() {
                 height={150}
               />
               <AlgorithmTile
-                algorithm="Merge Sort"
-                steps={state.mergeSortSteps}
-                isSorted={state.mergeSortSorted}
+                algorithm="Merge Sort Bottom Up"
+                steps={state.mergeSortBottomUpSteps}
+                isSorted={state.mergeSortBottomUpSorted}
                 onSort={handleSortSingle}
-                loading={state.loading.mergeSort}
+                loading={state.loading.mergeSortBottomUp}
                 isSortingAll={state.isSortingAll}
                 hasSortedAll={state.hasSortedAll}
                 height={150}
               />
               <AlgorithmTile
-                algorithm="Merge Sort Two"
-                steps={state.mergeSortTwoSteps}
-                isSorted={state.mergeSortTwoSorted}
+                algorithm="Merge Sort Top Down"
+                steps={state.mergeSortTopDownSteps}
+                isSorted={state.mergeSortTopDownSorted}
                 onSort={handleSortSingle}
-                loading={state.loading.mergeSortTwo}
+                loading={state.loading.mergeSortTopDown}
                 isSortingAll={state.isSortingAll}
                 hasSortedAll={state.hasSortedAll}
                 height={150}

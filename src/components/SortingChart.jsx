@@ -45,9 +45,9 @@ const SortingChart = ({ steps, algorithm, isSorted, hgt }) => {
   );
 
   return (
-    <Box mt={4}>
+    <Box>
       <ResponsiveContainer width="100%" height={hgt}>
-        <BarChart data={data} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
+        <BarChart data={data} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
           <Bar

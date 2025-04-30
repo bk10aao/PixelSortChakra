@@ -2,19 +2,19 @@ import { useState, useRef } from "react";
 import { Alert, AlertIcon, Box, SimpleGrid, Heading, VStack, Button } from "@chakra-ui/react";
 import NumberGeneratorForm from "../components/NumberGeneratorForm";
 import AlgorithmComparison from "../components/AlgorithmComparison";
-import { generateNumbers, mergeSort, mergeSortTwo } from "../Api";
+import { generateNumbers, mergeSortBottomUp, mergeSortTopDown } from "../Api";
 
 export default function MergeSortComparisonPage() {
   const [state, setState] = useState({
     value: 50,
     numbers: [],
-    mergeSortSteps: [],
-    mergeSortTwoSteps: [],
-    mergeSortSorted: false,
-    mergeSortTwoSorted: false,
+    mergeSortBottomUpSteps: [],
+    mergeSortTopDownSteps: [],
+    mergeSortBottomUpSorted: false,
+    mergeSortTopDownSorted: false,
     error: null,
     showTiles: false,
-    loading: { generate: false, mergeSort: false, mergeSortTwo: false },
+    loading: { generate: false, mergeSortBottomUp: false, mergeSortTopDown: false },
   });
 
   const graphRef = useRef(null);
@@ -27,10 +27,10 @@ export default function MergeSortComparisonPage() {
     updateState({
       error: null,
       numbers: [],
-      mergeSortSteps: [],
-      mergeSortTwoSteps: [],
-      mergeSortSorted: false,
-      mergeSortTwoSorted: false,
+      mergeSortBottomUpSteps: [],
+      mergeSortTopDownSteps: [],
+      mergeSortBottomUpSorted: false,
+      mergeSortTopDownSorted: false,
       showTiles: false,
       loading: { ...state.loading, generate: true },
     });
@@ -45,8 +45,8 @@ export default function MergeSortComparisonPage() {
       const numbers = data.results || [];
       updateState({
         numbers,
-        mergeSortSteps: [numbers],
-        mergeSortTwoSteps: [numbers],
+        mergeSortBottomUpSteps: [numbers],
+        mergeSortTopDownSteps: [numbers],
         showTiles: true,
         loading: { ...state.loading, generate: false },
       });
@@ -61,62 +61,60 @@ export default function MergeSortComparisonPage() {
   const handleMergeSort = async () => {
     updateState({
       error: null,
-      loading: { ...state.loading, mergeSort: true },
+      loading: { ...state.loading, mergeSortBottomUp: true },
     });
 
     const payload = { values: state.numbers };
 
     try {
-      const data = await mergeSort(payload);
+      const data = await mergeSortBottomUp(payload);
       const steps = data.results && Array.isArray(data.results) ? data.results : [];
       updateState({
-        mergeSortSteps: steps,
-        mergeSortSorted: steps.length > 0,
-        loading: { ...state.loading, mergeSort: false },
+        mergeSortBottomUpSteps: steps,
+        mergeSortBottomUpSorted: steps.length > 0,
+        loading: { ...state.loading, mergeSortBottomUp: false },
       });
     } catch (err) {
       console.error("Error sorting Merge Sort:", err);
       updateState({
         error: err.message,
-        loading: { ...state.loading, mergeSort: false },
+        loading: { ...state.loading, mergeSortBottomUp: false },
       });
     }
   };
 
-  const handleMergeSortTwo = async () => {
+  const handlemergeSortTopDown = async () => {
     updateState({
       error: null,
-      loading: { ...state.loading, mergeSortTwo: true },
+      loading: { ...state.loading, mergeSortTopDown: true },
     });
 
     const payload = { values: state.numbers };
 
     try {
-      const data = await mergeSortTwo(payload);
+      const data = await mergeSortTopDown(payload);
       const steps = data.results && Array.isArray(data.results) ? data.results : [];
       updateState({
-        mergeSortTwoSteps: steps,
-        mergeSortTwoSorted: steps.length > 0,
-        loading: { ...state.loading, mergeSortTwo: false },
+        mergeSortTopDownSteps: steps,
+        mergeSortTopDownSorted: steps.length > 0,
+        loading: { ...state.loading, mergeSortTopDown: false },
       });
     } catch (err) {
       console.error("Error sorting Merge Sort Two:", err);
       updateState({
         error: err.message,
-        loading: { ...state.loading, mergeSortTwo: false },
+        loading: { ...state.loading, mergeSortTopDown: false },
       });
     }
   };
 
   const handleSortBoth = async () => {
-    await Promise.all([handleMergeSort(), handleMergeSortTwo()]);
+    await Promise.all([handleMergeSort(), handlemergeSortTopDown()]);
   };
 
   return (
     <Box p={4} pt={{ base: "40px", md: "30px" }} mx="auto" maxW="1440px">
-      <Heading as="h1" size="xl" mb={6} textAlign="center">
-        Merge Sort vs Merge Sort Two
-      </Heading>
+
       <VStack spacing={4} mb={8} w="100%" align="stretch">
         <NumberGeneratorForm
           value={state.value}
@@ -137,10 +135,10 @@ export default function MergeSortComparisonPage() {
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8} ref={graphRef}>
             <Box>
               <AlgorithmComparison
-                algorithm="Merge Sort"
-                steps={state.mergeSortSteps}
-                isSorted={state.mergeSortSorted}
-                loading={state.loading.mergeSort}
+                algorithm="Bottom Up"
+                steps={state.mergeSortBottomUpSteps}
+                isSorted={state.mergeSortBottomUpSorted}
+                loading={state.loading.mergeSortBottomUp}
                 isSortingAll={false}
                 hasSortedAll={false}
                 height={400}
@@ -148,10 +146,10 @@ export default function MergeSortComparisonPage() {
             </Box>
             <Box>
               <AlgorithmComparison
-                algorithm="Merge Sort Two"
-                steps={state.mergeSortTwoSteps}
-                isSorted={state.mergeSortTwoSorted}
-                loading={state.loading.mergeSortTwo}
+                algorithm="Bottom Down"
+                steps={state.mergeSortTopDownSteps}
+                isSorted={state.mergeSortTopDownSorted}
+                loading={state.loading.mergeSortTopDown}
                 isSortingAll={false}
                 hasSortedAll={false}
                 height={400}
@@ -161,8 +159,8 @@ export default function MergeSortComparisonPage() {
           <Box mt={4}>
             <Button
               onClick={handleSortBoth}
-              isLoading={state.loading.mergeSort || state.loading.mergeSortTwo}
-              isDisabled={state.loading.mergeSort || state.loading.mergeSortTwo}
+              isLoading={state.loading.mergeSortBottomUp || state.loading.mergeSortTopDown}
+              isDisabled={state.loading.mergeSortBottomUp || state.loading.mergeSortTopDown}
               colorScheme="blue"
               width="100%"
             >

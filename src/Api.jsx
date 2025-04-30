@@ -35,11 +35,11 @@ export const selectionSort = (payload) =>
 export const bubbleSort = (payload) =>
 	fetchFromApi("/bubble-sort", payload, "Failed to sort numbers.");
 
-export const mergeSort = (payload) =>
-	fetchFromApi("/merge-sort", payload, "Failed to sort numbers.");
+export const mergeSortBottomUp = (payload) =>
+	fetchFromApi("/merge-sort-bottom-up", payload, "Failed to sort numbers.");
 
-export const mergeSortTwo = (payload) =>
-	fetchFromApi("/merge-sort-two", payload, "Failed to sort numbers.");
+export const mergeSortTopDown = (payload) =>
+	fetchFromApi("/merge-sort-top-down", payload, "Failed to sort numbers.");
 
 export const shellSort = (payload) =>
 	fetchFromApi("/shell-sort", payload, "Failed to sort numbers.");
