@@ -14,16 +14,7 @@ const SortingChart = ({ steps, algorithm, isSorted, hgt }) => {
   useEffect(() => {
     if (steps.length === 0 || !steps[0]) 
       return;
-
-    const arrayLength = steps[0].length;
-    const baseLength = 10;
-    const baseDuration = 500;
-    const minDuration = 100;
-    const maxDuration = 600;
-    const intervalDuration = Math.max(
-      minDuration,
-      Math.min(maxDuration, (baseDuration * baseLength) / arrayLength)
-    );
+    const intervalDuration = 150
 
     const interval = setInterval(() => {
       setCurrentStep((prev) => {

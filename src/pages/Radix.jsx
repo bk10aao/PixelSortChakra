@@ -115,7 +115,7 @@ export default function RadixSortComparisonPage() {
   return (
     <Box p={4} pt={{ base: "40px", md: "30px" }} mx="auto" maxW="1440px">
       <Heading as="h1" size="xl" mb={6} textAlign="center">
-        Radix Sort Least Signigicant Digit vs Radix Sort Most Significant Digit
+        Radix Sort Least Significant Digit vs Radix Sort Most Significant Digit
       </Heading>
       <VStack spacing={4} mb={8} w="100%" align="stretch">
         <NumberGeneratorForm
