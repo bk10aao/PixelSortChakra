@@ -23,6 +23,7 @@ import {
   timSort,
   introSort,
   inplaceMergeSort,
+  parallelMergeSort,
 } from "../Api";
 import NumberGeneratorForm from "../components/NumberGeneratorForm";
 import AlgorithmTile from "../components/AlgorithmTile";
@@ -44,6 +45,7 @@ export default function Algorithms() {
     timSortSteps: [],
     introSortSteps: [],
     inplaceMergeSortSteps: [],
+    parallelMergeSortSteps: [],
     quickSortSorted: false,
     selectionSortSorted: false,
     bubbleSortSorted: false,
@@ -57,6 +59,7 @@ export default function Algorithms() {
     timSortSorted: false,
     introSortSorted: false,
     inplaceMergeSorted: false,
+    parallelMergeSorted: false,
     error: null,
     showTiles: false,
     isSortingAll: false,
@@ -76,6 +79,7 @@ export default function Algorithms() {
       timSort: false,
       introSort: false,
       inplaceMergeSort: false,
+      parallelMergeSort: false
     },
   });
 
@@ -109,6 +113,7 @@ export default function Algorithms() {
       timSortSteps: [],
       introSortSteps: [],
       inplaceMergeSortSteps: [],
+      parallelMergeSortSteps: [],
       quickSortSorted: false,
       selectionSortSorted: false,
       bubbleSortSorted: false,
@@ -123,6 +128,7 @@ export default function Algorithms() {
       timSortSorted: false,
       introSortSorted: false,
       inplaceMergeSortSorted: false,
+      parallelMergeSortSorted: false,
       showTiles: false,
       hasSortedAll: false, 
       loading: { ...state.loading, generate: true },
@@ -152,6 +158,7 @@ export default function Algorithms() {
         timSortSteps: [numbers],
         introSortSteps: [numbers],
         inplaceMergeSortSteps: [numbers],
+        parallelMergeSortSteps: [numbers],
         quickSortSorted: false,
         selectionSortSorted: false,
         bubbleSortSorted: false,
@@ -166,6 +173,7 @@ export default function Algorithms() {
         timSortSorted: false,
         introSortSorted: false,
         inplaceMergeSortSorted: false,
+        parallelMergeSortSorted: false,
         showTiles: true,
         loading: { ...state.loading, generate: false },
       });
@@ -192,7 +200,8 @@ export default function Algorithms() {
       "Pancake Sort": { name: "pancakeSort", fn: pancakeSort },
       "Tim Sort": { name: "timSort", fn: timSort },
       "Intro Sort": { name: "introSort", fn: introSort },
-      "Inplace Merge Sort": { name: "inplaceMergeSort", fn: inplaceMergeSort}
+      "Inplace Merge Sort": { name: "inplaceMergeSort", fn: inplaceMergeSort},
+      "Parallel Merge Sort": { name: "parallelMergeSort", fn: parallelMergeSort}
     };
 
     const { name, fn } = algorithmMap[algorithm] || {};
@@ -246,6 +255,7 @@ export default function Algorithms() {
         timSort: true,
         introSort: true,
         inplaceMergeSort: true,
+        parallelMergeSort: true,
       },
     });
 
@@ -266,6 +276,7 @@ export default function Algorithms() {
       { name: "timSort", fn: timSort },
       { name: "introSort", fn: introSort },
       { name: "inplaceMergeSort", fn: inplaceMergeSort },
+      { name: "parallelMergeSort", fn: parallelMergeSort },
     ];
 
     try {
@@ -317,6 +328,7 @@ export default function Algorithms() {
           timSort: false,
           introSort: false,
           inplaceMergeSort: false,
+          parallelMergeSort: false,
         },
       });
     }
@@ -480,6 +492,16 @@ export default function Algorithms() {
                 isSorted={state.inplaceMergeSortSorted}
                 onSort={handleSortSingle}
                 loading={state.loading.inplaceMergeSort}
+                isSortingAll={state.isSortingAll}
+                hasSortedAll={state.hasSortedAll}
+                height={150}
+              />
+              <AlgorithmTile
+                algorithm="Parallel Merge Sort"
+                steps={state.parallelMergeSortSteps}
+                isSorted={state.pancakeSortSorted}
+                onSort={handleSortSingle}
+                loading={state.loading.parallelMergeSort}
                 isSortingAll={state.isSortingAll}
                 hasSortedAll={state.hasSortedAll}
                 height={150}

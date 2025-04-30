@@ -166,7 +166,7 @@ export default function RadixSortComparisonPage() {
               colorScheme="blue"
               width="100%"
             >
-              Sort Both
+              Sort
             </Button>
           </Box>
         </>
