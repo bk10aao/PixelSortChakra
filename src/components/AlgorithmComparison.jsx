@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Heading, Button } from "@chakra-ui/react";
 import SortingChart from "./SortingChart";
 
@@ -11,12 +11,22 @@ const AlgorithmComparison = ({
   isSortingAll,
   hasSortedAll,
   height,
+  totalSteps,
 }) => {
   const [clicked, setClicked] = useState(false);
 
-  const handleSort = () => {
+  // Log steps to debug prop updates
+  useEffect(() => {
+    console.log(`AlgorithmComparison (${algorithm}) steps updated:`, steps);
+  }, [steps, algorithm]);
+
+  const handleSort = async () => {
     setClicked(true);
-    onSort(algorithm);
+    try {
+      await onSort(algorithm);
+    } finally {
+      setClicked(false);
+    }
   };
 
   return (
@@ -29,6 +39,7 @@ const AlgorithmComparison = ({
         algorithm={algorithm}
         isSorted={isSorted}
         hgt={height}
+        totalSteps={totalSteps}
       />
       {onSort && (
         <Button

@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Alert, AlertIcon, Box, SimpleGrid, Heading, VStack, Button } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, SimpleGrid, VStack, Button } from "@chakra-ui/react";
 import NumberGeneratorForm from "../components/NumberGeneratorForm";
 import AlgorithmComparison from "../components/AlgorithmComparison";
 import { generateNumbers, inplaceMergeSort, mergeSortBottomUp, mergeSortTopDown, timSort, parallelMergeSort } from "../Api";
@@ -231,7 +231,7 @@ export default function MergeSortComparisonPage() {
                 loading={state.loading.mergeSortBottomUp}
                 isSortingAll={false}
                 hasSortedAll={false}
-                height={300}
+                height={150}
               />
             </Box>
             <Box>
@@ -242,7 +242,7 @@ export default function MergeSortComparisonPage() {
                 loading={state.loading.mergeSortTopDown}
                 isSortingAll={false}
                 hasSortedAll={false}
-                height={300}
+                height={150}
               />
             </Box>
             <Box>
@@ -253,7 +253,7 @@ export default function MergeSortComparisonPage() {
                 loading={state.loading.inplaceMergeSort}
                 isSortingAll={false}
                 hasSortedAll={false}
-                height={300}
+                height={150}
               />
             </Box>
             <Box>
@@ -264,7 +264,7 @@ export default function MergeSortComparisonPage() {
                 loading={state.loading.timSort}
                 isSortingAll={false}
                 hasSortedAll={false}
-                height={300}
+                height={150}
               />
             </Box>
             <Box>
@@ -275,7 +275,7 @@ export default function MergeSortComparisonPage() {
                 loading={state.loading.parallelMergeSort}
                 isSortingAll={false}
                 hasSortedAll={false}
-                height={300}
+                height={150}
               />
             </Box>
           </SimpleGrid>

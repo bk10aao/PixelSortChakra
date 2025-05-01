@@ -6,6 +6,7 @@ import {
   Button,
   SimpleGrid,
   VStack,
+  Heading,
 } from "@chakra-ui/react";
 import {
   generateNumbers,
@@ -58,12 +59,26 @@ export default function Algorithms() {
     pancakeSortSorted: false,
     timSortSorted: false,
     introSortSorted: false,
-    inplaceMergeSorted: false,
-    parallelMergeSorted: false,
+    inplaceMergeSortSorted: false,
+    parallelMergeSortSorted: false,
+    quickSortTotalSteps: undefined,
+    selectionSortTotalSteps: undefined,
+    bubbleSortTotalSteps: undefined,
+    mergeSortBottomUpTotalSteps: undefined,
+    mergeSortTopDownTotalSteps: undefined,
+    insertionSortTotalSteps: undefined,
+    heapSortTotalSteps: undefined,
+    radixSortLSDTotalSteps: undefined,
+    radixSortMSDTotalSteps: undefined,
+    pancakeSortTotalSteps: undefined,
+    timSortTotalSteps: undefined,
+    introSortTotalSteps: undefined,
+    inplaceMergeSortTotalSteps: undefined,
+    parallelMergeSortTotalSteps: undefined,
     error: null,
     showTiles: false,
     isSortingAll: false,
-    hasSortedAll: false, 
+    hasSortedAll: false,
     loading: {
       generate: false,
       quickSort: false,
@@ -79,7 +94,7 @@ export default function Algorithms() {
       timSort: false,
       introSort: false,
       inplaceMergeSort: false,
-      parallelMergeSort: false
+      parallelMergeSort: false,
     },
   });
 
@@ -129,8 +144,22 @@ export default function Algorithms() {
       introSortSorted: false,
       inplaceMergeSortSorted: false,
       parallelMergeSortSorted: false,
+      quickSortTotalSteps: undefined,
+      selectionSortTotalSteps: undefined,
+      bubbleSortTotalSteps: undefined,
+      mergeSortBottomUpTotalSteps: undefined,
+      mergeSortTopDownTotalSteps: undefined,
+      insertionSortTotalSteps: undefined,
+      heapSortTotalSteps: undefined,
+      radixSortLSDTotalSteps: undefined,
+      radixSortMSDTotalSteps: undefined,
+      pancakeSortTotalSteps: undefined,
+      timSortTotalSteps: undefined,
+      introSortTotalSteps: undefined,
+      inplaceMergeSortTotalSteps: undefined,
+      parallelMergeSortTotalSteps: undefined,
       showTiles: false,
-      hasSortedAll: false, 
+      hasSortedAll: false,
       loading: { ...state.loading, generate: true },
     });
 
@@ -191,7 +220,7 @@ export default function Algorithms() {
       "Selection Sort": { name: "selectionSort", fn: selectionSort },
       "Bubble Sort": { name: "bubbleSort", fn: bubbleSort },
       "Merge Sort Bottom Up": { name: "mergeSortBottomUp", fn: mergeSortBottomUp },
-      "Merge Sort Two": { name: "mergeSortTopDown", fn: mergeSortTopDown },
+      "Merge Sort Top Down": { name: "mergeSortTopDown", fn: mergeSortTopDown },
       "Insertion Sort": { name: "insertionSort", fn: insertionSort },
       "Shell Sort": { name: "shellSort", fn: shellSort },
       "Heap Sort": { name: "heapSort", fn: heapSort },
@@ -200,8 +229,8 @@ export default function Algorithms() {
       "Pancake Sort": { name: "pancakeSort", fn: pancakeSort },
       "Tim Sort": { name: "timSort", fn: timSort },
       "Intro Sort": { name: "introSort", fn: introSort },
-      "Inplace Merge Sort": { name: "inplaceMergeSort", fn: inplaceMergeSort},
-      "Parallel Merge Sort": { name: "parallelMergeSort", fn: parallelMergeSort}
+      "Inplace Merge Sort": { name: "inplaceMergeSort", fn: inplaceMergeSort },
+      "Parallel Merge Sort": { name: "parallelMergeSort", fn: parallelMergeSort },
     };
 
     const { name, fn } = algorithmMap[algorithm] || {};
@@ -220,9 +249,12 @@ export default function Algorithms() {
     try {
       const data = await fn(payload);
       const steps = data.results && Array.isArray(data.results) ? data.results : [];
+      const finalStep = steps[steps.length - 1] || [];
+      const isSorted = steps.length > 0 && finalStep.every((val, i) => i === 0 || val >= finalStep[i - 1]);
       updateState({
         [`${name}Steps`]: steps,
-        [`${name}Sorted`]: steps.length > 0,
+        [`${name}Sorted`]: isSorted,
+        [`${name}TotalSteps`]: steps.length,
         loading: { ...state.loading, [name]: false },
       });
     } catch (err) {
@@ -285,7 +317,9 @@ export default function Algorithms() {
           try {
             const data = await fn(payload);
             const steps = data.results && Array.isArray(data.results) ? data.results : [];
-            return { name, steps };
+            const finalStep = steps[steps.length - 1] || [];
+            const isSorted = steps.length > 0 && finalStep.every((val, i) => i === 0 || val >= finalStep[i - 1]);
+            return { name, steps, isSorted, totalSteps: steps.length };
           } catch (err) {
             console.error(`Error sorting ${name}:`, err);
             return { name, error: err.message };
@@ -293,10 +327,11 @@ export default function Algorithms() {
         })
       );
 
-      results.forEach(({ name, steps, error }) => {
+      results.forEach(({ name, steps, isSorted, totalSteps, error }) => {
         updateState({
           [`${name}Steps`]: steps || [],
-          [`${name}Sorted`]: steps.length > 0,
+          [`${name}Sorted`]: isSorted,
+          [`${name}TotalSteps`]: totalSteps,
           error: error || state.error,
           loading: { ...state.loading, [name]: false },
         });
@@ -335,184 +370,212 @@ export default function Algorithms() {
   };
 
   return (
-    <Box maxWidth="1440px" p={4}>
-      <NumberGeneratorForm
-        value={state.value}
-        loading={state.loading.generate}
-        onValueChange={(val) => updateState({ value: val })}
-        onSubmit={handleSubmit}
-      />
-      {state.error && (
-        <Alert status="error" mt={4}>
-          <AlertIcon />
-          {state.error}
-        </Alert>
-      )}
-      {state.numbers.length > 0 && (
-        <VStack spacing={6} mt={6} align="stretch">
-          {state.showTiles && (
-            <SimpleGrid
-              ref={graphRef}
-              columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
-              spacing={4}
+    <Box p={6} pt={{ base: "80px", md: "60px" }} mx="auto" maxW="1600px">
+      <VStack spacing={8} align="stretch">
+        <Heading as="h1" size="xl" textAlign="center" color="white" fontWeight="bold">
+          Sorting Algorithm Visualizer
+        </Heading>
+        <NumberGeneratorForm
+          value={state.value}
+          loading={state.loading.generate}
+          onValueChange={(val) => updateState({ value: val })}
+          onSubmit={handleSubmit}
+          width="100%"
+        />
+        {state.error && (
+          <Alert status="error" bg="red.900" color="gray.100" borderRadius="md">
+            <AlertIcon color="red.300" />
+            {state.error}
+          </Alert>
+        )}
+        {state.numbers.length > 0 && (
+          <VStack spacing={8} align="stretch">
+            {state.showTiles && (
+              <SimpleGrid
+                ref={graphRef}
+                columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
+                spacing={8}
+              >
+                <AlgorithmTile
+                  algorithm="Bubble Sort"
+                  steps={state.bubbleSortSteps}
+                  isSorted={state.bubbleSortSorted}
+                  totalSteps={state.bubbleSortTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.bubbleSort}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Heap Sort"
+                  steps={state.heapSortSteps}
+                  isSorted={state.heapSortSorted}
+                  totalSteps={state.heapSortTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.heapSort}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Insertion Sort"
+                  steps={state.insertionSortSteps}
+                  isSorted={state.insertionSortSorted}
+                  totalSteps={state.insertionSortTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.insertionSort}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Intro Sort"
+                  steps={state.introSortSteps}
+                  isSorted={state.introSortSorted}
+                  totalSteps={state.introSortTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.introSort}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Merge Sort Bottom Up"
+                  steps={state.mergeSortBottomUpSteps}
+                  isSorted={state.mergeSortBottomUpSorted}
+                  totalSteps={state.mergeSortBottomUpTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.mergeSortBottomUp}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Merge Sort Top Down"
+                  steps={state.mergeSortTopDownSteps}
+                  isSorted={state.mergeSortTopDownSorted}
+                  totalSteps={state.mergeSortTopDownTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.mergeSortTopDown}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Pancake Sort"
+                  steps={state.pancakeSortSteps}
+                  isSorted={state.pancakeSortSorted}
+                  totalSteps={state.pancakeSortTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.pancakeSort}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Quick Sort"
+                  steps={state.quickSortSteps}
+                  isSorted={state.quickSortSorted}
+                  totalSteps={state.quickSortTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.quickSort}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Radix Sort LSD"
+                  steps={state.radixSortLSDSteps}
+                  isSorted={state.radixSortLSDSorted}
+                  totalSteps={state.radixSortLSDTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.radixSortLSD}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Radix Sort MSD"
+                  steps={state.radixSortMSDSteps}
+                  isSorted={state.radixSortMSDSorted}
+                  totalSteps={state.radixSortMSDTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.radixSortMSD}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Selection Sort"
+                  steps={state.selectionSortSteps}
+                  isSorted={state.selectionSortSorted}
+                  totalSteps={state.selectionSortTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.selectionSort}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Shell Sort"
+                  steps={state.shellSortSteps}
+                  isSorted={state.shellSortSorted}
+                  totalSteps={state.shellSortTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.shellSort}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Tim Sort"
+                  steps={state.timSortSteps}
+                  isSorted={state.timSortSorted}
+                  totalSteps={state.timSortTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.timSort}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Inplace Merge Sort"
+                  steps={state.inplaceMergeSortSteps}
+                  isSorted={state.inplaceMergeSortSorted}
+                  totalSteps={state.inplaceMergeSortTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.inplaceMergeSort}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Parallel Merge Sort"
+                  steps={state.parallelMergeSortSteps}
+                  isSorted={state.parallelMergeSortSorted}
+                  totalSteps={state.parallelMergeSortTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.parallelMergeSort}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+              </SimpleGrid>
+            )}
+            <Button
+              variant="solid"
+              onClick={handleSortAll}
+              width={{ base: "100%" }}
+              alignSelf="center"
+              fontSize="lg"
+              isDisabled={state.isSortingAll}
             >
-              <AlgorithmTile
-                algorithm="Bubble Sort"
-                steps={state.bubbleSortSteps}
-                isSorted={state.bubbleSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.bubbleSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-              <AlgorithmTile
-                algorithm="Heap Sort"
-                steps={state.heapSortSteps}
-                isSorted={state.heapSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.heapSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-              <AlgorithmTile
-                algorithm="Insertion Sort"
-                steps={state.insertionSortSteps}
-                isSorted={state.insertionSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.insertionSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-              <AlgorithmTile
-                algorithm="Intro Sort"
-                steps={state.insertionSortSteps}
-                isSorted={state.insertionSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.introSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-              <AlgorithmTile
-                algorithm="Merge Sort Bottom Up"
-                steps={state.mergeSortBottomUpSteps}
-                isSorted={state.mergeSortBottomUpSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.mergeSortBottomUp}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-              <AlgorithmTile
-                algorithm="Merge Sort Top Down"
-                steps={state.mergeSortTopDownSteps}
-                isSorted={state.mergeSortTopDownSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.mergeSortTopDown}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-              <AlgorithmTile
-                algorithm="Pancake Sort"
-                steps={state.pancakeSortSteps}
-                isSorted={state.pancakeSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.pancakeSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-              <AlgorithmTile
-                algorithm="Quick Sort"
-                steps={state.quickSortSteps}
-                isSorted={state.quickSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.quickSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-              <AlgorithmTile
-                algorithm="Radix Sort LSD"
-                steps={state.radixSortLSDSteps}
-                isSorted={state.radixSortLSDSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.radixSortLSD}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-              <AlgorithmTile
-                algorithm="Radix Sort MSD"
-                steps={state.radixSortMSDSteps}
-                isSorted={state.radixSortMSDSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.radixSortMSD}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-              <AlgorithmTile
-                algorithm="Selection Sort"
-                steps={state.selectionSortSteps}
-                isSorted={state.selectionSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.selectionSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-              <AlgorithmTile
-                algorithm="Shell Sort"
-                steps={state.shellSortSteps}
-                isSorted={state.shellSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.shellSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-              <AlgorithmTile
-                algorithm="Tim Sort"
-                steps={state.timSortSteps}
-                isSorted={state.timSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.timSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-              <AlgorithmTile
-                algorithm="Inplace Merge Sort"
-                steps={state.inplaceMergeSortSteps}
-                isSorted={state.inplaceMergeSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.inplaceMergeSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-              <AlgorithmTile
-                algorithm="Parallel Merge Sort"
-                steps={state.parallelMergeSortSteps}
-                isSorted={state.pancakeSortSorted}
-                onSort={handleSortSingle}
-                loading={state.loading.parallelMergeSort}
-                isSortingAll={state.isSortingAll}
-                hasSortedAll={state.hasSortedAll}
-                height={150}
-              />
-            </SimpleGrid>
-          )}
-          <Button colorScheme="teal" onClick={handleSortAll} align="center">
-            Sort
-          </Button>
-        </VStack>
-      )}
+              Sort All
+            </Button>
+          </VStack>
+        )}
+      </VStack>
     </Box>
   );
 }

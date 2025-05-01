@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Alert, AlertIcon, Box, Center, Heading } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, VStack, Heading } from "@chakra-ui/react";
 import NumberGeneratorForm from "./NumberGeneratorForm";
 import AlgorithmTile from "./AlgorithmTile";
 import { generateNumbers } from "../Api";
@@ -10,6 +10,7 @@ export default function SortPage({ algorithmName, sortFunction }) {
     numbers: [],
     sortSteps: [],
     isSorted: false,
+    totalSteps: undefined,
     error: null,
     showTiles: false,
     loading: { generate: false, sort: false },
@@ -27,6 +28,7 @@ export default function SortPage({ algorithmName, sortFunction }) {
       numbers: [],
       sortSteps: [],
       isSorted: false,
+      totalSteps: undefined,
       showTiles: false,
       loading: { ...state.loading, generate: true },
     });
@@ -43,6 +45,7 @@ export default function SortPage({ algorithmName, sortFunction }) {
         numbers,
         sortSteps: [numbers],
         isSorted: false,
+        totalSteps: undefined,
         showTiles: true,
         loading: { ...state.loading, generate: false },
       });
@@ -65,9 +68,12 @@ export default function SortPage({ algorithmName, sortFunction }) {
     try {
       const data = await sortFunction(payload);
       const steps = data.results && Array.isArray(data.results) ? data.results : [];
+      const finalStep = steps[steps.length - 1] || [];
+      const isSorted = steps.length > 0 && finalStep.every((val, i) => i === 0 || val >= finalStep[i - 1]);
       updateState({
         sortSteps: steps,
-        isSorted: steps.length > 0,
+        isSorted,
+        totalSteps: steps.length,
         loading: { ...state.loading, sort: false },
       });
     } catch (err) {
@@ -80,37 +86,44 @@ export default function SortPage({ algorithmName, sortFunction }) {
   };
 
   return (
-    <Box p={6} pt={{ base: "80px", md: "60px" }} mx="auto">
-      <Center>
-        <Heading>{algorithmName}</Heading>
-      </Center>
-      <NumberGeneratorForm
-        value={state.value}
-        loading={state.loading.generate}
-        onValueChange={(val) => updateState({ value: val })}
-        onSubmit={handleSubmit}
-      />
+    <Box p={6} pt={{ base: "80px", md: "60px" }} mx="auto" maxW="1600px" bg="gray.800">
+        <VStack spacing={8} align="stretch">
+        <Heading as="h1" size="xl" textAlign="center" color="white" fontWeight="bold">
+          {algorithmName} Visualizer
+        </Heading>
+        <NumberGeneratorForm
+          value={state.value}
+          loading={state.loading.generate}
+          onValueChange={(val) => updateState({ value: val })}
+          onSubmit={handleSubmit}
+          width="100%"
+        />
       {state.numbers.length > 0 && (
         <>
           {state.error && (
-            <Alert status="error" mt={4} maxW="1440px" mx="auto">
-              <AlertIcon />
+            <Alert status="error" mt={4} maxW="1600px" mx="auto" bg="red.900" color="gray.100" borderRadius="md">
+              <AlertIcon color="red.300" />
               {state.error}
             </Alert>
           )}
           {state.showTiles && (
+            
               <AlgorithmTile
+                algorithm={algorithmName}
                 steps={state.sortSteps}
                 isSorted={state.isSorted}
+                totalSteps={state.totalSteps}
                 onSort={handleSort}
                 loading={state.loading.sort}
                 isSortingAll={false}
                 hasSortedAll={false}
                 height={400}
               />
+            
           )}
         </>
       )}
+      </VStack>
     </Box>
   );
 }

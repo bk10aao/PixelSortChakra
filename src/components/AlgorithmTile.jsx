@@ -1,34 +1,37 @@
-import React, { useState } from "react";
-import { Box, Heading, Button, Text } from "@chakra-ui/react";
+import { Box, Text, Button } from "@chakra-ui/react";
 import SortingChart from "./SortingChart";
 
-const AlgorithmTile = ({ algorithm, steps, isSorted, onSort, loading, isSortingAll, hasSortedAll, height }) => {
-  const [clicked, setClicked] = useState(false);
-
-
-  const handleSort = () => {
-    setClicked(true);
-    onSort(algorithm);
-  };
-
+const AlgorithmTile = ({
+  algorithm,
+  steps,
+  isSorted,
+  totalSteps,
+  onSort,
+  loading,
+  isSortingAll,
+  hasSortedAll,
+  height,
+}) => {
   return (
-    <Box p={1} borderWidth="1px" borderRadius="lg">
-      <Heading size="md" mb={1} textAlign={"center"}>
+    <Box borderWidth={1} borderRadius="md" p={4} bg="gray.800" borderColor="gray.600">
+      <Text fontSize="lg" fontWeight="semibold" mb={2} color="white" align={"center"}>
         {algorithm}
-      </Heading>
-      <SortingChart steps={steps} algorithm={algorithm} isSorted={isSorted} hgt={height}/>
+      </Text>
+      <SortingChart
+        steps={steps}
+        algorithm={algorithm}
+        isSorted={isSorted}
+        totalSteps={totalSteps}
+        hgt={height}
+      />
       <Button
-        type="button"
-        colorScheme="blue"
+        onClick={() => onSort(algorithm)}
         isLoading={loading}
-        loadingText="Sorting..."
-        onClick={handleSort}
-        isDisabled={clicked || isSortingAll || hasSortedAll} 
-        width="full"
-        my={1}
-        paddingLeft={0}
-        paddingRight={0}
-        marginTop={1}
+        isDisabled={isSortingAll || (hasSortedAll && isSorted)}
+        mt={2}
+        width="100%"
+        variant="solid"
+        fontSize="md"
       >
         Sort
       </Button>

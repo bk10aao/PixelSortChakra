@@ -24,7 +24,7 @@ import {
     };
   
     return (
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} >
         <VStack spacing={4} align="stretch">
           <FormControl>
             <Slider
@@ -33,7 +33,9 @@ import {
               min={1}
               max={100}
               step={1}
-              isDisabled={loading}>
+              isDisabled={loading}
+              w="full"
+              >
               <SliderTrack>
                 <SliderFilledTrack />
               </SliderTrack>

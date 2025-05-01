@@ -1,12 +1,8 @@
-import { Box, Flex, Link, useColorModeValue, IconButton, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import { Box, Flex, Link, IconButton, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
-  const bgColor = useColorModeValue("gray.100", "gray.900");
-  const textColor = useColorModeValue("gray.800", "white");
-  const activeLinkColor = useColorModeValue("teal.500", "teal.300");
-
   const navLinks = [
     { name: "All", path: "/"},
     { name: "Bubble", path: "/bubble" },
@@ -23,9 +19,19 @@ const NavBar = () => {
   ];
 
   return (
-    <Box bg={bgColor} px={4} py={2} top={0} width="100%" zIndex={10}>
-      <Flex align="center" justify="space-between" maxW="1440px" mx="auto">
-        <Flex display={{ base: "none", md: "flex" }} align="center">
+    <Box
+      bg="gray.700"
+      px={6}
+      py={3}
+      top={0}
+      width="100%"
+      zIndex={10}
+      borderBottom="2px"
+      borderColor="gray.500"
+      boxShadow="md"
+    >
+      <Flex align="center" justify="space-between" maxW="1600px" mx="auto">
+        <Flex display={{ base: "none", md: "flex" }} align="center" gap={3}>
           {navLinks.map((link) => (
             <Link
               as={NavLink}
@@ -33,10 +39,11 @@ const NavBar = () => {
               to={link.path}
               px={3}
               py={2}
-              color={textColor}
+              color="white"
               fontWeight="medium"
-              _hover={{ color: activeLinkColor }}
-              _activeLink={{ color: activeLinkColor, fontWeight: "bold" }}
+              rounded="md"
+              _hover={{ color: "teal.400", bg: "gray.600" }}
+              _activeLink={{ color: "teal.400", fontWeight: "bold", bg: "gray.600" }}
             >
               {link.name}
             </Link>
@@ -44,15 +51,26 @@ const NavBar = () => {
         </Flex>
         <Box display={{ base: "block", md: "none" }}>
           <Menu>
-            <MenuButton as={IconButton} icon={<HamburgerIcon />} variant="outline" aria-label="Menu" />
-            <MenuList bg={bgColor}>
+            <MenuButton
+              as={IconButton}
+              icon={<HamburgerIcon boxSize={6} />}
+              variant="outline"
+              borderColor="gray.500"
+              color="white"
+              _hover={{ bg: "gray.600", borderColor: "teal.400" }}
+              _active={{ bg: "gray.600" }}
+              aria-label="Menu"
+            />
+            <MenuList bg="gray.600" borderColor="gray.500">
               {navLinks.map((link) => (
                 <MenuItem
                   as={NavLink}
                   key={link.path}
                   to={link.path}
-                  color={textColor}
-                  _hover={{ color: activeLinkColor, bg: useColorModeValue("gray.200", "gray.700") }}
+                  color="white"
+                  _hover={{ color: "teal.400", bg: "teal.600" }}
+                  _activeLink={{ color: "teal.400", fontWeight: "bold" }}
+                  bg="gray.600"
                 >
                   {link.name}
                 </MenuItem>
