@@ -1,0 +1,312 @@
+/* styles.css */
+
+/* Define color variables */
+:root {
+  --gray-50: #F7FAFC;
+  --gray-100: #EDF2F7;
+  --gray-200: #E2E8F0;
+  --gray-300: #CBD5E0;
+  --gray-400: #A0AEC0;
+  --gray-500: #718096;
+  --gray-600: #4A5568;
+  --gray-700: #2D3748;
+  --gray-800: #1A202C;
+  --gray-900: #171923;
+  --teal-500: #38B2AC;
+  --teal-600: #319795;
+  --red-500: #E53E3E;
+  --blue-500: #3182CE;
+}
+
+/* Global styles */
+body {
+  background-color: var(--gray-800);
+  color: var(--gray-100);
+}
+
+h1 {
+  color: white;
+  font-weight: bold;
+}
+
+h3 {
+  color: white;
+  font-weight: 600;
+}
+
+/* Box styles */
+.chakra-box {
+  color: var(--gray-100);
+}
+
+/* Text styles */
+.chakra-text {
+  color: var(--gray-100);
+}
+
+/* Heading styles */
+.chakra-heading {
+  color: white;
+  font-weight: bold;
+}
+
+.chakra-heading[data-size="xl"] {
+  font-size: 2rem;
+  line-height: 2.5rem;
+}
+
+.chakra-heading[data-size="md"] {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* Stack styles (VStack) */
+.chakra-stack {
+  color: var(--gray-100);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.chakra-stack[data-spacing="4"] {
+  gap: 1rem;
+}
+
+.chakra-stack[data-spacing="8"] {
+  gap: 2rem;
+}
+
+/* SimpleGrid styles */
+.chakra-simple-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 30em) {
+  .chakra-simple-grid[data-columns-sm="2"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 48em) {
+  .chakra-simple-grid[data-columns-md="2"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .chakra-simple-grid[data-columns-md="3"] {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .chakra-simple-grid[data-columns-md="4"] {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 62em) {
+  .chakra-simple-grid[data-columns-lg="4"] {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Button styles */
+.chakra-button {
+  font-weight: bold;
+}
+
+.chakra-button[data-variant="solid"] {
+  background-color: var(--teal-500);
+  color: white;
+}
+
+.chakra-button[data-variant="solid"]:hover:not(:disabled) {
+  background-color: var(--teal-600);
+  transform: scale(1.02);
+  transition: all 0.2s;
+}
+
+.chakra-button[data-variant="solid"][data-loading="true"] {
+  opacity: 0.8;
+}
+
+.chakra-button[data-variant="solid"][data-loading="true"] .chakra-spinner {
+  color: white;
+}
+
+.chakra-button[data-color-scheme="blue"] {
+  background-color: var(--blue-500);
+  color: white;
+}
+
+.chakra-button[data-color-scheme="blue"]:hover:not(:disabled) {
+  background-color: #2B6CB0;
+  transform: scale(1.02);
+  transition: all 0.2s;
+}
+
+/* Alert styles */
+.chakra-alert {
+  background-color: var(--red-500);
+  color: var(--gray-100);
+  border-radius: 0.375rem;
+  width: 100%;
+  max-width: 1440px;
+}
+
+.chakra-alert[data-status="error"] {
+  background-color: #7F1D1D;
+}
+
+/* AlertIcon styles */
+.chakra-alert__icon {
+  color: var(--red-500);
+}
+
+.chakra-alert__icon[data-status="error"] {
+  color: var(--red-300);
+}
+
+/* Tabs styles */
+.chakra-tabs__tab {
+  color: var(--gray-300);
+  font-weight: 600;
+}
+
+.chakra-tabs__tab:hover {
+  color: var(--gray-100);
+}
+
+.chakra-tabs__tab[data-selected] {
+  color: white;
+  border-color: var(--teal-500);
+  border-bottom-width: 3px;
+}
+
+.chakra-tabs__tablist {
+  border-bottom-color: var(--gray-600);
+  background-color: var(--gray-700);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* FormLabel styles */
+.chakra-form__label {
+  color: white;
+  font-weight: 600;
+}
+
+/* Input styles */
+.chakra-input {
+  background-color: var(--gray-600);
+  color: var(--gray-100);
+  border-color: var(--gray-500);
+}
+
+.chakra-input:hover:not(:focus) {
+  border-color: var(--gray-400);
+}
+
+.chakra-input:focus {
+  border-color: var(--teal-500);
+  box-shadow: 0 0 0 1px var(--teal-500);
+}
+
+/* SortingChart styles */
+.sorting-chart__container {
+  border-radius: 0.375rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 1rem;
+  padding-bottom: 0.75rem;
+  border-width: 0;
+}
+
+.sorting-chart__tooltip {
+  padding: 0.5rem;
+  background-color: var(--gray-700);
+  border-radius: 0.375rem;
+  border-width: 0;
+}
+
+.sorting-chart__tooltip-text {
+  color: white;
+}
+
+.sorting-chart__step-text {
+  color: white;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Recharts Bar styles */
+.recharts-bar-rectangle,
+.recharts-rectangle {
+  fill: var(--teal-500);
+  transition: fill 0.2s;
+}
+
+.recharts-bar-rectangle[data-sorted="false"],
+.recharts-rectangle[data-sorted="false"] {
+  fill: var(--teal-500);
+}
+
+.recharts-bar-rectangle[data-sorted="true"],
+.recharts-rectangle[data-sorted="true"] {
+  fill: var(--red-500);
+}
+
+/* Page-specific styles */
+.algorithms-page__container,
+.merge-page__container,
+.radix-page__container {
+  padding: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1440px;
+}
+
+@media (min-width: 48em) {
+  .algorithms-page__container {
+    padding-top: 3.75rem;
+  }
+  .merge-page__container,
+  .radix-page__container {
+    padding-top: 1.875rem;
+  }
+}
+
+@media (max-width: 47.99em) {
+  .algorithms-page__container {
+    padding-top: 5rem;
+  }
+  .merge-page__container,
+  .radix-page__container {
+    padding-top: 2.5rem;
+  }
+}
+
+/* AlgorithmTile placeholder styles */
+.algorithm-tile__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--gray-700);
+  padding: 1rem;
+  border-radius: 0.375rem;
+}
+
+/* AlgorithmComparison placeholder styles */
+.algorithm-comparison__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--gray-700);
+  padding: 1rem;
+  border-radius: 0.375rem;
+}
+
+/* NumberGeneratorForm placeholder styles */
+.number-generator-form__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

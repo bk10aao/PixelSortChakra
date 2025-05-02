@@ -1,0 +1,53 @@
+/* chart.css */
+
+/* Define color variables directly to remove dependency */
+:root {
+    --teal-500: #38B2AC;
+    --red-500: #E53E3E;
+    --gray-700: #2D3748;
+  }
+  
+  /* Chart container styles */
+  .chart-container {
+    border-radius: 0.375rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    padding-top: 1rem;
+    padding-bottom: 0.75rem;
+    border-width: 0;
+  }
+  
+  /* Tooltip styles */
+  .chart-tooltip {
+    padding: 0.5rem;
+    background-color: var(--gray-700);
+    border-radius: 0.375rem;
+    border-width: 0;
+  }
+  
+  /* Tooltip text styles */
+  .chart-tooltip-text {
+    color: white;
+  }
+  
+  /* Step text styles */
+  .chart-step-text {
+    color: white;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  
+  /* Recharts Bar styles */
+  .recharts-rectangle {
+    fill: var(--teal-500, #38B2AC) !important;
+    transition: fill 0.2s;
+  }
+  
+  .recharts-rectangle[data-sorted="false"] {
+    fill: var(--teal-500, #38B2AC) !important;
+  }
+  
+  .recharts-rectangle[data-sorted="true"] {
+    fill: var(--red-500, #E53E3E) !important;
+  }
