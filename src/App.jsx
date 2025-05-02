@@ -1,4 +1,4 @@
-import { useEffect } from "react"; // Add useEffect import
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
@@ -16,7 +16,6 @@ import Selection from "./pages/Selection";
 import Shell from "./pages/Shell";
 import './app.css';
 
-// Define the custom dark theme
 const darkTheme = extendTheme({
   config: {
     initialColorMode: "dark",
@@ -47,13 +46,12 @@ const darkTheme = extendTheme({
 
 export default function App() {
   useEffect(() => {
-    // Dynamically set padding-top based on the navbar's height
     const navbar = document.querySelector('.navbar');
     if (navbar) {
       const navbarHeight = navbar.offsetHeight;
-      document.body.style.paddingTop = `${navbarHeight + 10}px`; // Add 10px buffer
+      document.body.style.paddingTop = `${navbarHeight + 10}px`;
     }
-  }, []); // Empty dependency array to run once on mount
+  }, []); 
 
   return (
     <ChakraProvider theme={darkTheme}>

@@ -5,20 +5,17 @@ import "../chart.css";
 const SortingChart = ({ steps, algorithm, isSorted, hgt, totalSteps }) => {
   const [currentStep, setCurrentStep] = useState(0);
 
-  // Debug incoming props
   useEffect(() => {
     console.log(`SortingChart (${algorithm}) props:`, { steps, totalSteps, currentStep, isSorted });
   }, [steps, totalSteps, currentStep, isSorted, algorithm]);
 
   useEffect(() => {
-    // Reset currentStep when steps change
     setCurrentStep(0);
 
     if (steps.length === 0 || !steps[0]) {
       return;
     }
 
-    // Calculate interval duration to sync with bar animation
     const arrayLength = steps[0]?.length || 10;
     const baseLength = 10;
     const baseBarDuration = 200;
@@ -28,7 +25,7 @@ const SortingChart = ({ steps, algorithm, isSorted, hgt, totalSteps }) => {
       minBarDuration,
       Math.min(maxBarDuration, (baseBarDuration * baseLength) / arrayLength)
     );
-    const intervalDuration = barAnimationDuration; // Sync with animation
+    const intervalDuration = barAnimationDuration; 
 
     const interval = setInterval(() => {
       setCurrentStep((prev) => {
@@ -43,7 +40,6 @@ const SortingChart = ({ steps, algorithm, isSorted, hgt, totalSteps }) => {
     return () => clearInterval(interval);
   }, [steps]);
 
-  // Ensure data is valid
   const data = steps[currentStep]?.map((value, index) => ({
     index: index + 1,
     value,
@@ -51,7 +47,6 @@ const SortingChart = ({ steps, algorithm, isSorted, hgt, totalSteps }) => {
 
   const isChartSorted = isSorted && currentStep === steps.length - 1;
 
-  // Debug data-sorted value
   console.log(`SortingChart (${algorithm}) data-sorted:`, isChartSorted);
 
   return (
@@ -74,7 +69,7 @@ const SortingChart = ({ steps, algorithm, isSorted, hgt, totalSteps }) => {
             <Bar
               dataKey="value"
               data-sorted={isChartSorted.toString()}
-              fill={isChartSorted ? "#E53E3E" : "#38B2AC"} // Fallback inline style
+              fill={isChartSorted ? "#E53E3E" : "#38B2AC"} 
               isAnimationActive={true}
               animationDuration={
                 Math.max(

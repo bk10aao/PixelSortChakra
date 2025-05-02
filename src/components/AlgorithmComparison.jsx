@@ -15,7 +15,6 @@ const AlgorithmComparison = ({
 }) => {
   const [clicked, setClicked] = useState(false);
 
-  // Log steps to debug prop updates
   useEffect(() => {
     console.log(`AlgorithmComparison (${algorithm}) steps updated:`, steps);
   }, [steps, algorithm]);
