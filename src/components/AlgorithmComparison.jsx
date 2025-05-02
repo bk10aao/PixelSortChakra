@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Heading, Button } from "@chakra-ui/react";
+import { Box, Text, Button } from "@chakra-ui/react";
 import SortingChart from "./SortingChart";
 
 const AlgorithmComparison = ({
@@ -30,9 +30,9 @@ const AlgorithmComparison = ({
 
   return (
     <Box p={1} borderWidth="1px" borderRadius="lg">
-      <Heading size="md" mb={1} textAlign="center">
+      <Text className="tile-title" color={"white"} align={"center"} textStyle="xl">
         {algorithm}
-      </Heading>
+      </Text>
       <SortingChart
         steps={steps}
         algorithm={algorithm}

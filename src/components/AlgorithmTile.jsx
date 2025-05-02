@@ -15,7 +15,7 @@ const AlgorithmTile = ({
 }) => {
   return (
     <Box className="tile-box">
-      <Text className="tile-title">
+      <Text className="tile-title" color={"white"} align={"center"} textStyle="xl">
         {algorithm}
       </Text>
       <SortingChart
