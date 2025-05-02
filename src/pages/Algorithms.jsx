@@ -570,6 +570,7 @@ export default function Algorithms() {
               alignSelf="center"
               fontSize="lg"
               isDisabled={state.isSortingAll}
+              colorScheme="blue"
             >
               Sort All
             </Button>

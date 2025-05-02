@@ -1,3 +1,4 @@
+import { useEffect } from "react"; // Add useEffect import
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
@@ -13,6 +14,7 @@ import Merge from "./pages/Merge";
 import Quick from "./pages/Quick";
 import Selection from "./pages/Selection";
 import Shell from "./pages/Shell";
+import './app.css';
 
 // Define the custom dark theme
 const darkTheme = extendTheme({
@@ -41,92 +43,18 @@ const darkTheme = extendTheme({
       500: "#E53E3E",
     },
   },
-  styles: {
-    global: {
-      body: {
-        bg: "gray.800",
-        color: "gray.100", // Brighter text for better contrast
-      },
-      h1: {
-        color: "white",
-        fontWeight: "bold",
-      },
-      h3: {
-        color: "white",
-        fontWeight: "semibold",
-      },
-    },
-  },
-  components: {
-    Button: {
-      baseStyle: {
-        fontWeight: "bold",
-      },
-      variants: {
-        solid: {
-          bg: "teal.500",
-          color: "white",
-          _hover: {
-            bg: "teal.600",
-            transform: "scale(1.02)",
-            transition: "all 0.2s",
-          },
-          _loading: {
-            opacity: 0.8,
-            _spinner: {
-              color: "white",
-            },
-          },
-        },
-      },
-    },
-    Tabs: {
-      baseStyle: {
-        tab: {
-          color: "gray.300",
-          fontWeight: "semibold",
-          _selected: {
-            color: "white",
-            borderColor: "teal.500",
-            borderBottomWidth: "3px",
-          },
-          _hover: {
-            color: "gray.100",
-          },
-        },
-        tablist: {
-          borderBottomColor: "gray.600",
-          bg: "gray.700",
-          py: 2,
-        },
-      },
-    },
-    FormLabel: {
-      baseStyle: {
-        color: "white",
-        fontWeight: "semibold",
-      },
-    },
-    Input: {
-      baseStyle: {
-        field: {
-          bg: "gray.600",
-          color: "gray.100",
-          borderColor: "gray.500",
-          _hover: {
-            borderColor: "gray.400",
-          },
-          _focus: {
-            borderColor: "teal.500",
-            boxShadow: "0 0 0 1px teal.500",
-          },
-        },
-      },
-    },
-  },
 });
 
 export default function App() {
+  useEffect(() => {
+    // Dynamically set padding-top based on the navbar's height
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+      const navbarHeight = navbar.offsetHeight;
+      document.body.style.paddingTop = `${navbarHeight + 10}px`; // Add 10px buffer
+    }
+  }, []); // Empty dependency array to run once on mount
+
   return (
     <ChakraProvider theme={darkTheme}>
       <BrowserRouter>
@@ -136,10 +64,10 @@ export default function App() {
           <Route path="/algorithms" element={<Algorithms />} />
           <Route path="/bubble" element={<Bubble />} />
           <Route path="/heap" element={<Heap />} />
-          <Route path="/radix" element={<Radix/>} />
+          <Route path="/radix" element={<Radix />} />
           <Route path="/insertion" element={<Insertion />} />
           <Route path="/merge" element={<Merge />} />
-          <Route path="/quick" element={<Quick/>} />
+          <Route path="/quick" element={<Quick />} />
           <Route path="/selection" element={<Selection />} />
           <Route path="/shell" element={<Shell />} />
           <Route path="/pancake" element={<Pancake />} />

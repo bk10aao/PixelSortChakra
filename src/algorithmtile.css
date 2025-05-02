@@ -1,0 +1,17 @@
+.tile-button {
+    margin-top: 0.5rem;
+    width: 100%;
+    font-size: var(--chakra-fontSizes-md);
+    padding: 0.5rem;
+    border-radius: var(--chakra-radii-md);
+    font-weight: var(--chakra-fontWeights-medium);
+  }
+  
+  .tile-button:hover:not(:disabled) {
+    background-color: var(--chakra-colors-blue-600);
+  }
+  
+  .tile-button:disabled {
+    background-color: var(--chakra-colors-blue-300);
+    cursor: not-allowed;
+  }

@@ -1,0 +1,144 @@
+/* NavBar.css */
+
+/* Define color variables directly to remove dependency */
+:root {
+    --gray-700: #2D3748;
+    --gray-600: #4A5568;
+    --gray-500: #718096;
+    --teal-400: #4FD1C5;
+  }
+  
+  /* Navbar container styles */
+  .navbar {
+    background-color: var(--gray-700);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    border-bottom: 2px solid;
+    border-color: var(--gray-500);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    position: fixed;
+  }
+  
+  /* Navbar inner container styles */
+  .navbar-container {
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+  }
+  
+  /* Desktop links container styles */
+  .navbar-link {
+    display: flex;
+    gap: 0.75rem; /* Match Chakra's gap={3} */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Desktop link styles */
+  .navbar-link a {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: white;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    text-decoration: none;
+  }
+  
+  .navbar-link a:hover {
+    color: var(--teal-400);
+    background-color: var(--gray-600);
+  }
+  
+  .navbar-link a.active {
+    color: var(--teal-400);
+    font-weight: bold;
+    background-color: var(--gray-600);
+  }
+  
+  /* Mobile menu button styles */
+  .navbar-menu-button {
+    border: 1px solid var(--gray-500);
+    color: white;
+    background: none;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+  }
+  
+  .navbar-menu-button:hover {
+    background-color: var(--gray-600);
+    border-color: var(--teal-400);
+  }
+  
+  .navbar-menu-button:active {
+    background-color: var(--gray-600);
+  }
+  
+  /* Mobile menu list styles */
+  .navbar-menu-list {
+    background-color: var(--gray-600);
+    border: 1px solid var(--gray-500);
+    border-radius: 0.375rem;
+    padding: 0.5rem 0;
+    list-style: none;
+    margin: 0;
+    display: none;
+  }
+  
+  .navbar-menu-list.active {
+    display: block;
+  }
+  
+  /* Mobile menu item styles */
+  .navbar-menu-item {
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .navbar-menu-item:hover {
+    color: var(--teal-400);
+    background-color: var(--teal-600);
+  }
+  
+  .navbar-menu-item.active {
+    color: var(--teal-400);
+    font-weight: bold;
+  }
+  
+  /* Responsive styles */
+  @media (min-width: 48em) {
+    .navbar-link {
+      display: flex;
+    }
+  
+    .navbar-menu-button {
+      display: none;
+    }
+  
+    .navbar-menu-list {
+      display: none !important;
+    }
+  }
+  
+  @media (max-width: 47.99em) {
+    .navbar-link {
+      display: none;
+    }
+  
+    .navbar-menu-button {
+      display: inline-block;
+    }
+  }

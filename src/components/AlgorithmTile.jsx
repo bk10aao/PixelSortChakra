@@ -1,5 +1,6 @@
 import { Box, Text, Button } from "@chakra-ui/react";
 import SortingChart from "./SortingChart";
+import "../algorithmtile.css";
 
 const AlgorithmTile = ({
   algorithm,
@@ -13,8 +14,8 @@ const AlgorithmTile = ({
   height,
 }) => {
   return (
-    <Box borderWidth={1} borderRadius="md" p={4} bg="gray.800" borderColor="gray.600">
-      <Text fontSize="lg" fontWeight="semibold" mb={2} color="white" align={"center"}>
+    <Box className="tile-box">
+      <Text className="tile-title">
         {algorithm}
       </Text>
       <SortingChart
@@ -28,10 +29,8 @@ const AlgorithmTile = ({
         onClick={() => onSort(algorithm)}
         isLoading={loading}
         isDisabled={isSortingAll || (hasSortedAll && isSorted)}
-        mt={2}
-        width="100%"
-        variant="solid"
-        fontSize="md"
+        className="tile-button"
+        colorScheme="blue" // RE-ADD this
       >
         Sort
       </Button>

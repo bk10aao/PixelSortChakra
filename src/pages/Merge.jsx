@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Alert, AlertIcon, Box, SimpleGrid, VStack, Button } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, SimpleGrid, VStack, Button, Heading } from "@chakra-ui/react";
 import NumberGeneratorForm from "../components/NumberGeneratorForm";
 import AlgorithmComparison from "../components/AlgorithmComparison";
 import { generateNumbers, inplaceMergeSort, mergeSortBottomUp, mergeSortTopDown, timSort, parallelMergeSort } from "../Api";
@@ -204,7 +204,9 @@ export default function MergeSortComparisonPage() {
 
   return (
     <Box p={4} pt={{ base: "40px", md: "30px" }} mx="auto" maxW="1440px">
-
+      <Heading as="h1" size="xl" mb={6} textAlign="center">
+        Comparing Merge Sort Algorithms
+      </Heading>
       <VStack spacing={4} mb={8} w="100%" align="stretch">
         <NumberGeneratorForm
           value={state.value}
