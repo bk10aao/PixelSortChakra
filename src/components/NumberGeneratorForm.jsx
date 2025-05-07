@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
     Button,
@@ -16,10 +16,8 @@ import {
     onValueChange,
     onSubmit,
   }) => {
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const handleFormSubmit = (e) => {
       e.preventDefault();
-      setIsButtonDisabled(true);
       onSubmit(e, value);
     };
   

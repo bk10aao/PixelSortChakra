@@ -15,10 +15,6 @@ const AlgorithmComparison = ({
 }) => {
   const [clicked, setClicked] = useState(false);
 
-  useEffect(() => {
-    console.log(`AlgorithmComparison (${algorithm}) steps updated:`, steps);
-  }, [steps, algorithm]);
-
   const handleSort = async () => {
     setClicked(true);
     try {

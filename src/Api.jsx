@@ -70,3 +70,6 @@ export const inplaceMergeSort = (payload) =>
 
 export const parallelMergeSort = (payload) =>
 	fetchFromApi("/parallel-merge-sort", payload, "Failed to sort numbers.");
+
+export const bucketSort = (payload) =>
+	fetchFromApi("/bucket-sort", payload, "Failed to sort numbers.");

@@ -260,17 +260,6 @@ export default function MergeSortComparisonPage() {
             </Box>
             <Box>
               <AlgorithmComparison
-                algorithm="Tim"
-                steps={state.timSortSteps}
-                isSorted={state.timSortSorted}
-                loading={state.loading.timSort}
-                isSortingAll={false}
-                hasSortedAll={false}
-                height={150}
-              />
-            </Box>
-            <Box>
-              <AlgorithmComparison
                 algorithm="Parallel"
                 steps={state.parallelMergeSortSteps}
                 isSorted={state.parallelMergeSortSorted}

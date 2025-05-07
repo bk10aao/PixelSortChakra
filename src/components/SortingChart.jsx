@@ -6,10 +6,6 @@ const SortingChart = ({ steps, algorithm, isSorted, hgt, totalSteps }) => {
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
-    console.log(`SortingChart (${algorithm}) props:`, { steps, totalSteps, currentStep, isSorted });
-  }, [steps, totalSteps, currentStep, isSorted, algorithm]);
-
-  useEffect(() => {
     setCurrentStep(0);
 
     if (steps.length === 0 || !steps[0]) {
@@ -46,8 +42,6 @@ const SortingChart = ({ steps, algorithm, isSorted, hgt, totalSteps }) => {
   })) || [];
 
   const isChartSorted = isSorted && currentStep === steps.length - 1;
-
-  console.log(`SortingChart (${algorithm}) data-sorted:`, isChartSorted);
 
   return (
     <div>

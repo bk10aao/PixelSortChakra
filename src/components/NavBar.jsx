@@ -6,6 +6,7 @@ const NavBar = () => {
   const navLinks = [
     { name: "All", path: "/"},
     { name: "Bubble", path: "/bubble" },
+    { name: "Bucket", path: "/bucket" },
     { name: "Heap", path: "/heap" },
     { name: "Insertion", path: "/insertion" },
     { name: "Intro", path: "/intro" },

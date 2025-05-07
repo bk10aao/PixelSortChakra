@@ -15,6 +15,7 @@ import Quick from "./pages/Quick";
 import Selection from "./pages/Selection";
 import Shell from "./pages/Shell";
 import './app.css';
+import Bucket from "./pages/Bucket";
 
 const darkTheme = extendTheme({
   config: {
@@ -61,6 +62,7 @@ export default function App() {
           <Route path="/" element={<Algorithms />} />
           <Route path="/algorithms" element={<Algorithms />} />
           <Route path="/bubble" element={<Bubble />} />
+          <Route path="/bucket" element={<Bucket />} />
           <Route path="/heap" element={<Heap />} />
           <Route path="/radix" element={<Radix />} />
           <Route path="/insertion" element={<Insertion />} />

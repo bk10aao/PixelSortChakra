@@ -25,6 +25,7 @@ import {
   introSort,
   inplaceMergeSort,
   parallelMergeSort,
+  bucketSort,
 } from "../Api";
 import NumberGeneratorForm from "../components/NumberGeneratorForm";
 import AlgorithmTile from "../components/AlgorithmTile";
@@ -47,6 +48,7 @@ export default function Algorithms() {
     introSortSteps: [],
     inplaceMergeSortSteps: [],
     parallelMergeSortSteps: [],
+    bucketSortSteps: [],
     quickSortSorted: false,
     selectionSortSorted: false,
     bubbleSortSorted: false,
@@ -61,6 +63,7 @@ export default function Algorithms() {
     introSortSorted: false,
     inplaceMergeSortSorted: false,
     parallelMergeSortSorted: false,
+    bucketSortSorted: false,
     quickSortTotalSteps: undefined,
     selectionSortTotalSteps: undefined,
     bubbleSortTotalSteps: undefined,
@@ -75,6 +78,7 @@ export default function Algorithms() {
     introSortTotalSteps: undefined,
     inplaceMergeSortTotalSteps: undefined,
     parallelMergeSortTotalSteps: undefined,
+    bucketSortTotalSteps: undefined,
     error: null,
     showTiles: false,
     isSortingAll: false,
@@ -95,6 +99,7 @@ export default function Algorithms() {
       introSort: false,
       inplaceMergeSort: false,
       parallelMergeSort: false,
+      bucketSort: false,
     },
   });
 
@@ -129,6 +134,7 @@ export default function Algorithms() {
       introSortSteps: [],
       inplaceMergeSortSteps: [],
       parallelMergeSortSteps: [],
+      bucketSortSteps: [],
       quickSortSorted: false,
       selectionSortSorted: false,
       bubbleSortSorted: false,
@@ -142,6 +148,7 @@ export default function Algorithms() {
       pancakeSortSorted: false,
       timSortSorted: false,
       introSortSorted: false,
+      bucketSortSorted: false,
       inplaceMergeSortSorted: false,
       parallelMergeSortSorted: false,
       quickSortTotalSteps: undefined,
@@ -158,6 +165,7 @@ export default function Algorithms() {
       introSortTotalSteps: undefined,
       inplaceMergeSortTotalSteps: undefined,
       parallelMergeSortTotalSteps: undefined,
+      bucketSortTotalSteps: undefined,
       showTiles: false,
       hasSortedAll: false,
       loading: { ...state.loading, generate: true },
@@ -188,6 +196,7 @@ export default function Algorithms() {
         introSortSteps: [numbers],
         inplaceMergeSortSteps: [numbers],
         parallelMergeSortSteps: [numbers],
+        bucketSortSteps: [numbers],
         quickSortSorted: false,
         selectionSortSorted: false,
         bubbleSortSorted: false,
@@ -203,6 +212,7 @@ export default function Algorithms() {
         introSortSorted: false,
         inplaceMergeSortSorted: false,
         parallelMergeSortSorted: false,
+        bucketSortSorted: false,
         showTiles: true,
         loading: { ...state.loading, generate: false },
       });
@@ -231,6 +241,7 @@ export default function Algorithms() {
       "Intro Sort": { name: "introSort", fn: introSort },
       "Inplace Merge Sort": { name: "inplaceMergeSort", fn: inplaceMergeSort },
       "Parallel Merge Sort": { name: "parallelMergeSort", fn: parallelMergeSort },
+      "Bucket Sort": { name: "bucketSort", fn: bucketSort },
     };
 
     const { name, fn } = algorithmMap[algorithm] || {};
@@ -288,6 +299,7 @@ export default function Algorithms() {
         introSort: true,
         inplaceMergeSort: true,
         parallelMergeSort: true,
+        bucketSort: true,
       },
     });
 
@@ -309,6 +321,7 @@ export default function Algorithms() {
       { name: "introSort", fn: introSort },
       { name: "inplaceMergeSort", fn: inplaceMergeSort },
       { name: "parallelMergeSort", fn: parallelMergeSort },
+      { name: "bucketSort", fn: bucketSort },
     ];
 
     try {
@@ -364,6 +377,7 @@ export default function Algorithms() {
           introSort: false,
           inplaceMergeSort: false,
           parallelMergeSort: false,
+          bucketSort: false,
         },
       });
     }
@@ -408,6 +422,17 @@ export default function Algorithms() {
                   height={150}
                 />
                 <AlgorithmTile
+                  algorithm="Bucket Sort"
+                  steps={state.bucketSortSteps}
+                  isSorted={state.bucketSortSorted}
+                  totalSteps={state.bucketSortTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.bucketSort}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
                   algorithm="Heap Sort"
                   steps={state.heapSortSteps}
                   isSorted={state.heapSortSorted}
@@ -425,6 +450,17 @@ export default function Algorithms() {
                   totalSteps={state.insertionSortTotalSteps}
                   onSort={handleSortSingle}
                   loading={state.loading.insertionSort}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Inplace Merge Sort"
+                  steps={state.inplaceMergeSortSteps}
+                  isSorted={state.inplaceMergeSortSorted}
+                  totalSteps={state.inplaceMergeSortTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.inplaceMergeSort}
                   isSortingAll={state.isSortingAll}
                   hasSortedAll={state.hasSortedAll}
                   height={150}
@@ -469,6 +505,17 @@ export default function Algorithms() {
                   totalSteps={state.pancakeSortTotalSteps}
                   onSort={handleSortSingle}
                   loading={state.loading.pancakeSort}
+                  isSortingAll={state.isSortingAll}
+                  hasSortedAll={state.hasSortedAll}
+                  height={150}
+                />
+                <AlgorithmTile
+                  algorithm="Parallel Merge Sort"
+                  steps={state.parallelMergeSortSteps}
+                  isSorted={state.parallelMergeSortSorted}
+                  totalSteps={state.parallelMergeSortTotalSteps}
+                  onSort={handleSortSingle}
+                  loading={state.loading.parallelMergeSort}
                   isSortingAll={state.isSortingAll}
                   hasSortedAll={state.hasSortedAll}
                   height={150}
@@ -535,28 +582,6 @@ export default function Algorithms() {
                   totalSteps={state.timSortTotalSteps}
                   onSort={handleSortSingle}
                   loading={state.loading.timSort}
-                  isSortingAll={state.isSortingAll}
-                  hasSortedAll={state.hasSortedAll}
-                  height={150}
-                />
-                <AlgorithmTile
-                  algorithm="Inplace Merge Sort"
-                  steps={state.inplaceMergeSortSteps}
-                  isSorted={state.inplaceMergeSortSorted}
-                  totalSteps={state.inplaceMergeSortTotalSteps}
-                  onSort={handleSortSingle}
-                  loading={state.loading.inplaceMergeSort}
-                  isSortingAll={state.isSortingAll}
-                  hasSortedAll={state.hasSortedAll}
-                  height={150}
-                />
-                <AlgorithmTile
-                  algorithm="Parallel Merge Sort"
-                  steps={state.parallelMergeSortSteps}
-                  isSorted={state.parallelMergeSortSorted}
-                  totalSteps={state.parallelMergeSortTotalSteps}
-                  onSort={handleSortSingle}
-                  loading={state.loading.parallelMergeSort}
                   isSortingAll={state.isSortingAll}
                   hasSortedAll={state.hasSortedAll}
                   height={150}
