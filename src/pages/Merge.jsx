@@ -233,7 +233,7 @@ export default function MergeSortComparisonPage() {
                 loading={state.loading.mergeSortBottomUp}
                 isSortingAll={false}
                 hasSortedAll={false}
-                height={150}
+                height={200}
               />
             </Box>
             <Box>
@@ -244,7 +244,7 @@ export default function MergeSortComparisonPage() {
                 loading={state.loading.mergeSortTopDown}
                 isSortingAll={false}
                 hasSortedAll={false}
-                height={150}
+                height={200}
               />
             </Box>
             <Box>
@@ -255,7 +255,7 @@ export default function MergeSortComparisonPage() {
                 loading={state.loading.inplaceMergeSort}
                 isSortingAll={false}
                 hasSortedAll={false}
-                height={150}
+                height={200}
               />
             </Box>
             <Box>
@@ -266,7 +266,7 @@ export default function MergeSortComparisonPage() {
                 loading={state.loading.parallelMergeSort}
                 isSortingAll={false}
                 hasSortedAll={false}
-                height={150}
+                height={200}
               />
             </Box>
           </SimpleGrid>

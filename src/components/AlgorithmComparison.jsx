@@ -16,6 +16,10 @@ const algorithmComplexities = {
     time: "O(n log n)",
     space: "O(1)",
   },
+  "Parallel": {
+    time: "O(n log n)",
+    space: "O(n)",
+  },
   "Least Significant Digit": {
     time: "O(nk)",
     space: "O(n + k)",
