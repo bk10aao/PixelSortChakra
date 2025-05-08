@@ -43,6 +43,14 @@ const SortingChart = ({ steps, algorithm, isSorted, hgt, totalSteps }) => {
 
   const isChartSorted = isSorted && currentStep === steps.length - 1;
 
+  // Prevent hover behavior by controlling the fill color explicitly
+  const getBarFillColor = (index) => {
+    if (isChartSorted) {
+      return "#E53E3E"; // Change the color when sorted
+    }
+    return "#38B2AC"; // Default color
+  };
+
   return (
     <div>
       <div className="chart-container">
@@ -63,14 +71,11 @@ const SortingChart = ({ steps, algorithm, isSorted, hgt, totalSteps }) => {
             <Bar
               dataKey="value"
               data-sorted={isChartSorted.toString()}
-              fill={isChartSorted ? "#E53E3E" : "#38B2AC"} 
-              isAnimationActive={true}
-              animationDuration={
-                Math.max(
-                  100,
-                  Math.min(300, (200 * 10) / (steps[0]?.length || 10))
-                )
-              }
+              isAnimationActive={false} // Disable animation
+              fill={getBarFillColor()} // Always use the same color, no hover effect
+              onMouseEnter={() => {}} // Disable hover event
+              onMouseLeave={() => {}} // Disable hover event
+              activeDot={false} // Disable the active hover dot that appears over bars
             />
           </BarChart>
         </ResponsiveContainer>

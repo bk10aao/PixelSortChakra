@@ -137,7 +137,7 @@ export default function RadixSortComparisonPage() {
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8} ref={graphRef}>
             <Box>
               <AlgorithmComparison
-                algorithm="Radix Sort Least Significant Digit"
+                algorithm="Least Significant Digit"
                 steps={state.radixSortLSDSteps}
                 isSorted={state.radixSortLSDSorted}
                 loading={state.loading.radixSortLSD}
@@ -148,7 +148,7 @@ export default function RadixSortComparisonPage() {
             </Box>
             <Box>
               <AlgorithmComparison
-                algorithm="Radix Sort Most Significant Digit"
+                algorithm="Most Significant Digit"
                 steps={state.radixSortMSDSteps}
                 isSorted={state.radixSortMSDSorted}
                 loading={state.loading.radixSortMSD}

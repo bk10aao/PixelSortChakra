@@ -1,8 +1,10 @@
+// SortPage.jsx
 import { useState, useRef } from "react";
-import { Alert, AlertIcon, Box, VStack, Heading } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, VStack, Heading, Text, Tooltip } from "@chakra-ui/react";
 import NumberGeneratorForm from "./NumberGeneratorForm";
 import AlgorithmTile from "./AlgorithmTile";
 import { generateNumbers } from "../Api";
+import { spaceComplexities, timeComplexities } from "../utils/timeComplexities";  // Import time complexities
 
 export default function SortPage({ algorithmName, sortFunction }) {
   const [state, setState] = useState({
@@ -85,12 +87,20 @@ export default function SortPage({ algorithmName, sortFunction }) {
     }
   };
 
+  const timeComplexity = timeComplexities[algorithmName] || "Unknown";  // Fetch the time complexity
+  const spaceComplexity = spaceComplexities[algorithmName] || "Unknown";
   return (
     <Box p={6} pt={{ base: "80px", md: "60px" }} mx="auto" maxW="1600px" bg="gray.800">
-        <VStack spacing={8} align="stretch">
+      <VStack spacing={8} align="stretch">
         <Heading as="h1" size="xl" textAlign="center" color="white" fontWeight="bold">
           {algorithmName} Visualizer
         </Heading>
+        {/* Display Time Complexity */}
+        <Tooltip label="Estimated time complexity of the selected algorithm" fontSize="md">
+          <Text textAlign="center" color="gray.300" fontSize="lg">
+            Time Complexity: <strong>{timeComplexity}</strong> Space Complexity: <strong>{spaceComplexity}</strong> 
+          </Text>
+        </Tooltip>
         <NumberGeneratorForm
           value={state.value}
           loading={state.loading.generate}
@@ -98,16 +108,15 @@ export default function SortPage({ algorithmName, sortFunction }) {
           onSubmit={handleSubmit}
           width="100%"
         />
-      {state.numbers.length > 0 && (
-        <>
-          {state.error && (
-            <Alert status="error" mt={4} maxW="1600px" mx="auto" bg="red.900" color="gray.100" borderRadius="md">
-              <AlertIcon color="red.300" />
-              {state.error}
-            </Alert>
-          )}
-          {state.showTiles && (
-            
+        {state.numbers.length > 0 && (
+          <>
+            {state.error && (
+              <Alert status="error" mt={4} maxW="1600px" mx="auto" bg="red.900" color="gray.100" borderRadius="md">
+                <AlertIcon color="red.300" />
+                {state.error}
+              </Alert>
+            )}
+            {state.showTiles && (
               <AlgorithmTile
                 algorithm={algorithmName}
                 steps={state.sortSteps}
@@ -118,11 +127,11 @@ export default function SortPage({ algorithmName, sortFunction }) {
                 isSortingAll={false}
                 hasSortedAll={false}
                 height={400}
+                timeComplexity={timeComplexity}  // Pass time complexity as prop
               />
-            
-          )}
-        </>
-      )}
+            )}
+          </>
+        )}
       </VStack>
     </Box>
   );
