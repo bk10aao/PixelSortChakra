@@ -8,7 +8,7 @@ const algorithmComplexities = {
     time: "O(n log n)",
     space: "O(k)",
   },
-  "Bottom Down": {
+  "Top Down": {
     time: "O(n log n)",
     space: "O(k)",
   },

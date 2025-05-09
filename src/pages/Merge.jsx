@@ -238,7 +238,7 @@ export default function MergeSortComparisonPage() {
             </Box>
             <Box>
               <AlgorithmComparison
-                algorithm="Bottom Down"
+                algorithm="Top Down"
                 steps={state.mergeSortTopDownSteps}
                 isSorted={state.mergeSortTopDownSorted}
                 loading={state.loading.mergeSortTopDown}
