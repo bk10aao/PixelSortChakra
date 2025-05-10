@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useRef } from "react";
 import { Alert, AlertIcon, Box, SimpleGrid, Heading, VStack, Button } from "@chakra-ui/react";
 import NumberGeneratorForm from "../components/NumberGeneratorForm";

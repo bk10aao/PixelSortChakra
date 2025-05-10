@@ -1,3 +1,4 @@
+import React from "react";
 import SortPage from "../components/SortPage";
 import { pancakeSort } from "../Api";
 
