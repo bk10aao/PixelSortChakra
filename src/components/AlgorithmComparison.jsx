@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Box, Text, Button, VStack, Heading } from "@chakra-ui/react";
 import SortingChart from './SortingChart'; 
+import PropTypes from "prop-types";
 
-// Updated dictionary for algorithm complexities
 const algorithmComplexities = {
   "Bottom Up": {
     time: "O(n log n)",
@@ -93,6 +93,18 @@ const AlgorithmComparison = ({
       )}
     </Box>
   );
+};
+
+AlgorithmComparison.propTypes = {
+  algorithm: PropTypes.string.isRequired,
+  steps: PropTypes.arrayOf(PropTypes.any).isRequired,
+  isSorted: PropTypes.bool.isRequired,
+  onSort: PropTypes.func,
+  loading: PropTypes.bool.isRequired,
+  isSortingAll: PropTypes.bool.isRequired,
+  hasSortedAll: PropTypes.bool.isRequired,
+  height: PropTypes.number.isRequired,
+  totalSteps: PropTypes.number.isRequired,
 };
 
 export default AlgorithmComparison;
