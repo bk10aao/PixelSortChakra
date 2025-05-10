@@ -1,10 +1,11 @@
-// SortPage.jsx
+import React from "react";
 import { useState, useRef } from "react";
 import { Alert, AlertIcon, Box, VStack, Heading, Text, Tooltip } from "@chakra-ui/react";
 import NumberGeneratorForm from "./NumberGeneratorForm";
 import AlgorithmTile from "./AlgorithmTile";
 import { generateNumbers } from "../Api";
-import { spaceComplexities, timeComplexities } from "../utils/timeComplexities";  // Import time complexities
+import { spaceComplexities, timeComplexities } from "../utils/timeComplexities";
+import PropTypes from "prop-types";
 
 export default function SortPage({ algorithmName, sortFunction }) {
   const [state, setState] = useState({
@@ -17,8 +18,6 @@ export default function SortPage({ algorithmName, sortFunction }) {
     showTiles: false,
     loading: { generate: false, sort: false },
   });
-
-  const graphRef = useRef(null);
 
   const updateState = (updates) => {
     setState((prev) => ({ ...prev, ...updates }));
@@ -87,7 +86,7 @@ export default function SortPage({ algorithmName, sortFunction }) {
     }
   };
 
-  const timeComplexity = timeComplexities[algorithmName] || "Unknown";  // Fetch the time complexity
+  const timeComplexity = timeComplexities[algorithmName] || "Unknown"; 
   const spaceComplexity = spaceComplexities[algorithmName] || "Unknown";
   return (
     <Box p={6} pt={{ base: "80px", md: "60px" }} mx="auto" maxW="1600px" bg="gray.800">
@@ -127,7 +126,7 @@ export default function SortPage({ algorithmName, sortFunction }) {
                 isSortingAll={false}
                 hasSortedAll={false}
                 height={400}
-                timeComplexity={timeComplexity}  // Pass time complexity as prop
+                timeComplexity={timeComplexity}
               />
             )}
           </>
@@ -136,3 +135,8 @@ export default function SortPage({ algorithmName, sortFunction }) {
     </Box>
   );
 }
+
+SortPage.propTypes = {
+  algorithmName: PropTypes.string.isRequired,
+  sortFunction: PropTypes.func.isRequired,
+};
