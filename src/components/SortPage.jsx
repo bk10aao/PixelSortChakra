@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Alert, AlertIcon, Box, VStack, Heading, Text, Tooltip } from "@chakra-ui/react";
 import NumberGeneratorForm from "./NumberGeneratorForm";
 import AlgorithmTile from "./AlgorithmTile";

@@ -1,3 +1,5 @@
+import React from "react";
+import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { BarChart, Bar, Tooltip, ResponsiveContainer } from "recharts";
 import "../chart.css";
@@ -43,12 +45,11 @@ const SortingChart = ({ steps, isSorted, hgt, totalSteps }) => {
 
   const isChartSorted = isSorted && currentStep === steps.length - 1;
 
-  // Prevent hover behavior by controlling the fill color explicitly
-  const getBarFillColor = (index) => {
+  const getBarFillColor = () => {
     if (isChartSorted) {
-      return "#E53E3E"; // Change the color when sorted
+      return "#E53E3E";
     }
-    return "#38B2AC"; // Default color
+    return "#38B2AC";
   };
 
   return (
@@ -71,11 +72,11 @@ const SortingChart = ({ steps, isSorted, hgt, totalSteps }) => {
             <Bar
               dataKey="value"
               data-sorted={isChartSorted.toString()}
-              isAnimationActive={false} // Disable animation
-              fill={getBarFillColor()} // Always use the same color, no hover effect
-              onMouseEnter={() => {}} // Disable hover event
-              onMouseLeave={() => {}} // Disable hover event
-              activeDot={false} // Disable the active hover dot that appears over bars
+              isAnimationActive={false} 
+              fill={getBarFillColor()} 
+              onMouseEnter={() => {}} 
+              onMouseLeave={() => {}}
+              activeDot={false}
             />
           </BarChart>
         </ResponsiveContainer>
@@ -86,6 +87,13 @@ const SortingChart = ({ steps, isSorted, hgt, totalSteps }) => {
       </p>
     </div>
   );
+};
+
+SortingChart.propTypes = {
+  steps: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  isSorted: PropTypes.bool.isRequired,
+  hgt: PropTypes.number.isRequired,
+  totalSteps: PropTypes.number.isRequired,
 };
 
 export default SortingChart;
