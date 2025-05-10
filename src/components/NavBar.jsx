@@ -1,11 +1,20 @@
 import React from "react";
-import { Box, Flex, Link, IconButton, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Link,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem
+} from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
   const navLinks = [
-    { name: "All", path: "/"},
+    { name: "All", path: "/" },
     { name: "Bubble", path: "/bubble" },
     { name: "Bucket", path: "/bucket" },
     { name: "Heap", path: "/heap" },
@@ -17,7 +26,7 @@ const NavBar = () => {
     { name: "Radix", path: "/radix" },
     { name: "Selection", path: "/selection" },
     { name: "Shell", path: "/shell" },
-    { name: "Tim", path: "/tim" },
+    { name: "Tim", path: "/tim" }
   ];
 
   return (

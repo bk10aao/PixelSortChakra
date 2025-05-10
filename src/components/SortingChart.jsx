@@ -23,7 +23,7 @@ const SortingChart = ({ steps, isSorted, hgt, totalSteps }) => {
       minBarDuration,
       Math.min(maxBarDuration, (baseBarDuration * baseLength) / arrayLength)
     );
-    const intervalDuration = barAnimationDuration; 
+    const intervalDuration = barAnimationDuration;
 
     const interval = setInterval(() => {
       setCurrentStep((prev) => {
@@ -38,10 +38,11 @@ const SortingChart = ({ steps, isSorted, hgt, totalSteps }) => {
     return () => clearInterval(interval);
   }, [steps]);
 
-  const data = steps[currentStep]?.map((value, index) => ({
-    index: index + 1,
-    value,
-  })) || [];
+  const data =
+    steps[currentStep]?.map((value, index) => ({
+      index: index + 1,
+      value
+    })) || [];
 
   const isChartSorted = isSorted && currentStep === steps.length - 1;
 
@@ -72,9 +73,9 @@ const SortingChart = ({ steps, isSorted, hgt, totalSteps }) => {
             <Bar
               dataKey="value"
               data-sorted={isChartSorted.toString()}
-              isAnimationActive={false} 
-              fill={getBarFillColor()} 
-              onMouseEnter={() => {}} 
+              isAnimationActive={false}
+              fill={getBarFillColor()}
+              onMouseEnter={() => {}}
               onMouseLeave={() => {}}
               activeDot={false}
             />
@@ -83,7 +84,7 @@ const SortingChart = ({ steps, isSorted, hgt, totalSteps }) => {
       </div>
       <p className="chart-step-text">
         Step: {steps.length > 1 || (steps.length === 1 && isSorted) ? currentStep + 1 : 1} /{" "}
-        {steps.length > 1 || (steps.length === 1 && isSorted) ? (totalSteps || steps.length) : "?"}
+        {steps.length > 1 || (steps.length === 1 && isSorted) ? totalSteps || steps.length : "?"}
       </p>
     </div>
   );
@@ -93,7 +94,7 @@ SortingChart.propTypes = {
   steps: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
   isSorted: PropTypes.bool.isRequired,
   hgt: PropTypes.number.isRequired,
-  totalSteps: PropTypes.number.isRequired,
+  totalSteps: PropTypes.number.isRequired
 };
 
 export default SortingChart;

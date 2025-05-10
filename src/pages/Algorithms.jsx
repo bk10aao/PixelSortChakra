@@ -1,15 +1,7 @@
 import React from "react";
 
 import { useState, useRef, useEffect } from "react";
-import {
-  Alert,
-  AlertIcon,
-  Box,
-  Button,
-  SimpleGrid,
-  VStack,
-  Heading,
-} from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, Button, SimpleGrid, VStack, Heading } from "@chakra-ui/react";
 import {
   generateNumbers,
   quickSort,
@@ -27,7 +19,7 @@ import {
   introSort,
   inplaceMergeSort,
   parallelMergeSort,
-  bucketSort,
+  bucketSort
 } from "../Api";
 import NumberGeneratorForm from "../components/NumberGeneratorForm";
 import AlgorithmTile from "../components/AlgorithmTile";
@@ -101,8 +93,8 @@ export default function Algorithms() {
       introSort: false,
       inplaceMergeSort: false,
       parallelMergeSort: false,
-      bucketSort: false,
-    },
+      bucketSort: false
+    }
   });
 
   const graphRef = useRef(null);
@@ -170,12 +162,12 @@ export default function Algorithms() {
       bucketSortTotalSteps: undefined,
       showTiles: false,
       hasSortedAll: false,
-      loading: { ...state.loading, generate: true },
+      loading: { ...state.loading, generate: true }
     });
 
     const payload = {
       value: parseInt(value),
-      maxRange: parseInt(value),
+      maxRange: parseInt(value)
     };
 
     try {
@@ -216,12 +208,12 @@ export default function Algorithms() {
         parallelMergeSortSorted: false,
         bucketSortSorted: false,
         showTiles: true,
-        loading: { ...state.loading, generate: false },
+        loading: { ...state.loading, generate: false }
       });
     } catch (err) {
       updateState({
         error: err.message,
-        loading: { ...state.loading, generate: false },
+        loading: { ...state.loading, generate: false }
       });
     }
   };
@@ -243,7 +235,7 @@ export default function Algorithms() {
       "Intro Sort": { name: "introSort", fn: introSort },
       "Inplace Merge Sort": { name: "inplaceMergeSort", fn: inplaceMergeSort },
       "Parallel Merge Sort": { name: "parallelMergeSort", fn: parallelMergeSort },
-      "Bucket Sort": { name: "bucketSort", fn: bucketSort },
+      "Bucket Sort": { name: "bucketSort", fn: bucketSort }
     };
 
     const { name, fn } = algorithmMap[algorithm] || {};
@@ -254,7 +246,7 @@ export default function Algorithms() {
 
     updateState({
       error: null,
-      loading: { ...state.loading, [name]: true },
+      loading: { ...state.loading, [name]: true }
     });
 
     const payload = { values: state.numbers };
@@ -263,18 +255,19 @@ export default function Algorithms() {
       const data = await fn(payload);
       const steps = data.results && Array.isArray(data.results) ? data.results : [];
       const finalStep = steps[steps.length - 1] || [];
-      const isSorted = steps.length > 0 && finalStep.every((val, i) => i === 0 || val >= finalStep[i - 1]);
+      const isSorted =
+        steps.length > 0 && finalStep.every((val, i) => i === 0 || val >= finalStep[i - 1]);
       updateState({
         [`${name}Steps`]: steps,
         [`${name}Sorted`]: isSorted,
         [`${name}TotalSteps`]: steps.length,
-        loading: { ...state.loading, [name]: false },
+        loading: { ...state.loading, [name]: false }
       });
     } catch (err) {
       console.error(`Error sorting ${name}:`, err);
       updateState({
         error: err.message,
-        loading: { ...state.loading, [name]: false },
+        loading: { ...state.loading, [name]: false }
       });
     }
   };
@@ -301,8 +294,8 @@ export default function Algorithms() {
         introSort: true,
         inplaceMergeSort: true,
         parallelMergeSort: true,
-        bucketSort: true,
-      },
+        bucketSort: true
+      }
     });
 
     const payload = { values: state.numbers };
@@ -323,7 +316,7 @@ export default function Algorithms() {
       { name: "introSort", fn: introSort },
       { name: "inplaceMergeSort", fn: inplaceMergeSort },
       { name: "parallelMergeSort", fn: parallelMergeSort },
-      { name: "bucketSort", fn: bucketSort },
+      { name: "bucketSort", fn: bucketSort }
     ];
 
     try {
@@ -333,7 +326,8 @@ export default function Algorithms() {
             const data = await fn(payload);
             const steps = data.results && Array.isArray(data.results) ? data.results : [];
             const finalStep = steps[steps.length - 1] || [];
-            const isSorted = steps.length > 0 && finalStep.every((val, i) => i === 0 || val >= finalStep[i - 1]);
+            const isSorted =
+              steps.length > 0 && finalStep.every((val, i) => i === 0 || val >= finalStep[i - 1]);
             return { name, steps, isSorted, totalSteps: steps.length };
           } catch (err) {
             console.error(`Error sorting ${name}:`, err);
@@ -348,7 +342,7 @@ export default function Algorithms() {
           [`${name}Sorted`]: isSorted,
           [`${name}TotalSteps`]: totalSteps,
           error: error || state.error,
-          loading: { ...state.loading, [name]: false },
+          loading: { ...state.loading, [name]: false }
         });
       });
 
@@ -356,7 +350,7 @@ export default function Algorithms() {
 
       updateState({
         numbers: lastSteps.length > 0 ? lastSteps[lastSteps.length - 1] : state.numbers,
-        isSortingAll: false,
+        isSortingAll: false
       });
     } catch (err) {
       updateState({
@@ -379,8 +373,8 @@ export default function Algorithms() {
           introSort: false,
           inplaceMergeSort: false,
           parallelMergeSort: false,
-          bucketSort: false,
-        },
+          bucketSort: false
+        }
       });
     }
   };
@@ -407,11 +401,7 @@ export default function Algorithms() {
         {state.numbers.length > 0 && (
           <VStack spacing={8} align="stretch">
             {state.showTiles && (
-              <SimpleGrid
-                ref={graphRef}
-                columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
-                spacing={8}
-              >
+              <SimpleGrid ref={graphRef} columns={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing={8}>
                 <AlgorithmTile
                   algorithm="Bubble Sort"
                   steps={state.bubbleSortSteps}

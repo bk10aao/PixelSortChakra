@@ -16,7 +16,7 @@ export default function SortPage({ algorithmName, sortFunction }) {
     totalSteps: undefined,
     error: null,
     showTiles: false,
-    loading: { generate: false, sort: false },
+    loading: { generate: false, sort: false }
   });
 
   const updateState = (updates) => {
@@ -31,12 +31,12 @@ export default function SortPage({ algorithmName, sortFunction }) {
       isSorted: false,
       totalSteps: undefined,
       showTiles: false,
-      loading: { ...state.loading, generate: true },
+      loading: { ...state.loading, generate: true }
     });
 
     const payload = {
       value: parseInt(value),
-      maxRange: parseInt(value),
+      maxRange: parseInt(value)
     };
 
     try {
@@ -48,12 +48,12 @@ export default function SortPage({ algorithmName, sortFunction }) {
         isSorted: false,
         totalSteps: undefined,
         showTiles: true,
-        loading: { ...state.loading, generate: false },
+        loading: { ...state.loading, generate: false }
       });
     } catch (err) {
       updateState({
         error: err.message,
-        loading: { ...state.loading, generate: false },
+        loading: { ...state.loading, generate: false }
       });
     }
   };
@@ -61,7 +61,7 @@ export default function SortPage({ algorithmName, sortFunction }) {
   const handleSort = async () => {
     updateState({
       error: null,
-      loading: { ...state.loading, sort: true },
+      loading: { ...state.loading, sort: true }
     });
 
     const payload = { values: state.numbers };
@@ -70,23 +70,24 @@ export default function SortPage({ algorithmName, sortFunction }) {
       const data = await sortFunction(payload);
       const steps = data.results && Array.isArray(data.results) ? data.results : [];
       const finalStep = steps[steps.length - 1] || [];
-      const isSorted = steps.length > 0 && finalStep.every((val, i) => i === 0 || val >= finalStep[i - 1]);
+      const isSorted =
+        steps.length > 0 && finalStep.every((val, i) => i === 0 || val >= finalStep[i - 1]);
       updateState({
         sortSteps: steps,
         isSorted,
         totalSteps: steps.length,
-        loading: { ...state.loading, sort: false },
+        loading: { ...state.loading, sort: false }
       });
     } catch (err) {
       console.error(`Error sorting ${algorithmName}:`, err);
       updateState({
         error: err.message,
-        loading: { ...state.loading, sort: false },
+        loading: { ...state.loading, sort: false }
       });
     }
   };
 
-  const timeComplexity = timeComplexities[algorithmName] || "Unknown"; 
+  const timeComplexity = timeComplexities[algorithmName] || "Unknown";
   const spaceComplexity = spaceComplexities[algorithmName] || "Unknown";
   return (
     <Box p={6} pt={{ base: "80px", md: "60px" }} mx="auto" maxW="1600px" bg="gray.800">
@@ -97,7 +98,8 @@ export default function SortPage({ algorithmName, sortFunction }) {
         {/* Display Time Complexity */}
         <Tooltip label="Estimated time complexity of the selected algorithm" fontSize="md">
           <Text textAlign="center" color="gray.300" fontSize="lg">
-            Time Complexity: <strong>{timeComplexity}</strong> Space Complexity: <strong>{spaceComplexity}</strong> 
+            Time Complexity: <strong>{timeComplexity}</strong> Space Complexity:{" "}
+            <strong>{spaceComplexity}</strong>
           </Text>
         </Tooltip>
         <NumberGeneratorForm
@@ -110,7 +112,15 @@ export default function SortPage({ algorithmName, sortFunction }) {
         {state.numbers.length > 0 && (
           <>
             {state.error && (
-              <Alert status="error" mt={4} maxW="1600px" mx="auto" bg="red.900" color="gray.100" borderRadius="md">
+              <Alert
+                status="error"
+                mt={4}
+                maxW="1600px"
+                mx="auto"
+                bg="red.900"
+                color="gray.100"
+                borderRadius="md"
+              >
                 <AlertIcon color="red.300" />
                 {state.error}
               </Alert>
@@ -138,5 +148,5 @@ export default function SortPage({ algorithmName, sortFunction }) {
 
 SortPage.propTypes = {
   algorithmName: PropTypes.string.isRequired,
-  sortFunction: PropTypes.func.isRequired,
+  sortFunction: PropTypes.func.isRequired
 };

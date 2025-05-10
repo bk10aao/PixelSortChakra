@@ -15,7 +15,7 @@ export default function RadixSortComparisonPage() {
     radixSortMSDSorted: false,
     error: null,
     showTiles: false,
-    loading: { generate: false, radixSortLSD: false, radixSortMSD: false },
+    loading: { generate: false, radixSortLSD: false, radixSortMSD: false }
   });
 
   const graphRef = useRef(null);
@@ -33,12 +33,12 @@ export default function RadixSortComparisonPage() {
       radixSortLSDSorted: false,
       radixSortMSDSorted: false,
       showTiles: false,
-      loading: { ...state.loading, generate: true },
+      loading: { ...state.loading, generate: true }
     });
 
     const payload = {
       value: parseInt(value),
-      maxRange: parseInt(value),
+      maxRange: parseInt(value)
     };
 
     try {
@@ -49,12 +49,12 @@ export default function RadixSortComparisonPage() {
         radixSortLSDSteps: [numbers],
         radixSortMSDSteps: [numbers],
         showTiles: true,
-        loading: { ...state.loading, generate: false },
+        loading: { ...state.loading, generate: false }
       });
     } catch (err) {
       updateState({
         error: err.message,
-        loading: { ...state.loading, generate: false },
+        loading: { ...state.loading, generate: false }
       });
     }
   };
@@ -62,7 +62,7 @@ export default function RadixSortComparisonPage() {
   const handleRadixSortLSD = async () => {
     updateState({
       error: null,
-      loading: { ...state.loading, radixSortLSD: true },
+      loading: { ...state.loading, radixSortLSD: true }
     });
 
     const payload = { values: state.numbers };
@@ -73,13 +73,13 @@ export default function RadixSortComparisonPage() {
       updateState({
         radixSortLSDSteps: steps,
         radixSortLSDSorted: steps.length > 0,
-        loading: { ...state.loading, radixLSDSort: false },
+        loading: { ...state.loading, radixLSDSort: false }
       });
     } catch (err) {
       console.error("Error sorting Radix Sort Least Significant Digit:", err);
       updateState({
         error: err.message,
-        loading: { ...state.loading, radixLSDSort: false },
+        loading: { ...state.loading, radixLSDSort: false }
       });
     }
   };
@@ -87,7 +87,7 @@ export default function RadixSortComparisonPage() {
   const handleRadixSortMSD = async () => {
     updateState({
       error: null,
-      loading: { ...state.loading, radixSortMSD: true },
+      loading: { ...state.loading, radixSortMSD: true }
     });
 
     const payload = { values: state.numbers };
@@ -98,13 +98,13 @@ export default function RadixSortComparisonPage() {
       updateState({
         radixSortMSDSteps: steps,
         radixSortMSDSorted: steps.length > 0,
-        loading: { ...state.loading, radixSortMSD: false },
+        loading: { ...state.loading, radixSortMSD: false }
       });
     } catch (err) {
       console.error("Error sorting Radix Sort Most Significant DIgit:", err);
       updateState({
         error: err.message,
-        loading: { ...state.loading, radixSortMSD: false },
+        loading: { ...state.loading, radixSortMSD: false }
       });
     }
   };

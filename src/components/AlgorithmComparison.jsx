@@ -1,33 +1,33 @@
 import React, { useState } from "react";
 import { Box, Text, Button, VStack, Heading } from "@chakra-ui/react";
-import SortingChart from './SortingChart'; 
+import SortingChart from "./SortingChart";
 import PropTypes from "prop-types";
 
 const algorithmComplexities = {
   "Bottom Up": {
     time: "O(n log n)",
-    space: "O(k)",
+    space: "O(k)"
   },
   "Top Down": {
     time: "O(n log n)",
-    space: "O(k)",
+    space: "O(k)"
   },
-  "Inplace": {
+  Inplace: {
     time: "O(n log n)",
-    space: "O(1)",
+    space: "O(1)"
   },
-  "Parallel": {
+  Parallel: {
     time: "O(n log n)",
-    space: "O(n)",
+    space: "O(n)"
   },
   "Least Significant Digit": {
     time: "O(nk)",
-    space: "O(n + k)",
+    space: "O(n + k)"
   },
   "Most Significant Digit": {
     time: "O(nk)",
-    space: "O(n + k)",
-  },
+    space: "O(n + k)"
+  }
 };
 
 const AlgorithmComparison = ({
@@ -39,7 +39,7 @@ const AlgorithmComparison = ({
   isSortingAll,
   hasSortedAll,
   height,
-  totalSteps,
+  totalSteps
 }) => {
   const [clicked, setClicked] = useState(false);
 
@@ -60,14 +60,20 @@ const AlgorithmComparison = ({
   return (
     <Box>
       <VStack spacing={2} align="center" mt={4} color="white">
-        <Heading className="tile-title" color={"white"} textStyle="xl" size={"sm"} textAlign="center">
+        <Heading
+          className="tile-title"
+          color={"white"}
+          textStyle="xl"
+          size={"sm"}
+          textAlign="center"
+        >
           {algorithm}
         </Heading>
         <Text textStyle="xs" textAlign="center">
           Time {complexities.time} Space {complexities.space}
         </Text>
       </VStack>
-      
+
       <SortingChart
         steps={steps}
         algorithm={algorithm}
@@ -75,7 +81,7 @@ const AlgorithmComparison = ({
         hgt={height}
         totalSteps={totalSteps}
       />
-      
+
       {onSort && (
         <Button
           type="button"
@@ -104,7 +110,7 @@ AlgorithmComparison.propTypes = {
   isSortingAll: PropTypes.bool.isRequired,
   hasSortedAll: PropTypes.bool.isRequired,
   height: PropTypes.number.isRequired,
-  totalSteps: PropTypes.number.isRequired,
+  totalSteps: PropTypes.number.isRequired
 };
 
 export default AlgorithmComparison;

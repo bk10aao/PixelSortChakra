@@ -3,7 +3,14 @@ import { useState, useRef } from "react";
 import { Alert, AlertIcon, Box, SimpleGrid, VStack, Button, Heading } from "@chakra-ui/react";
 import NumberGeneratorForm from "../components/NumberGeneratorForm";
 import AlgorithmComparison from "../components/AlgorithmComparison";
-import { generateNumbers, inplaceMergeSort, mergeSortBottomUp, mergeSortTopDown, timSort, parallelMergeSort } from "../Api";
+import {
+  generateNumbers,
+  inplaceMergeSort,
+  mergeSortBottomUp,
+  mergeSortTopDown,
+  timSort,
+  parallelMergeSort
+} from "../Api";
 
 export default function MergeSortComparisonPage() {
   const [state, setState] = useState({
@@ -21,7 +28,7 @@ export default function MergeSortComparisonPage() {
     parallelMergeSortSorted: false,
     error: null,
     showTiles: false,
-    loading: { generate: false, mergeSortBottomUp: false, mergeSortTopDown: false },
+    loading: { generate: false, mergeSortBottomUp: false, mergeSortTopDown: false }
   });
 
   const graphRef = useRef(null);
@@ -45,12 +52,12 @@ export default function MergeSortComparisonPage() {
       parallelMergeSortSorted: false,
       timSortSorted: false,
       showTiles: false,
-      loading: { ...state.loading, generate: true },
+      loading: { ...state.loading, generate: true }
     });
 
     const payload = {
       value: parseInt(value),
-      maxRange: parseInt(value),
+      maxRange: parseInt(value)
     };
 
     try {
@@ -64,12 +71,12 @@ export default function MergeSortComparisonPage() {
         timSortSteps: [numbers],
         parallelMergeSortSteps: [numbers],
         showTiles: true,
-        loading: { ...state.loading, generate: false },
+        loading: { ...state.loading, generate: false }
       });
     } catch (err) {
       updateState({
         error: err.message,
-        loading: { ...state.loading, generate: false },
+        loading: { ...state.loading, generate: false }
       });
     }
   };
@@ -77,7 +84,7 @@ export default function MergeSortComparisonPage() {
   const handleMergeSort = async () => {
     updateState({
       error: null,
-      loading: { ...state.loading, mergeSortBottomUp: true },
+      loading: { ...state.loading, mergeSortBottomUp: true }
     });
 
     const payload = { values: state.numbers };
@@ -88,13 +95,13 @@ export default function MergeSortComparisonPage() {
       updateState({
         mergeSortBottomUpSteps: steps,
         mergeSortBottomUpSorted: steps.length > 0,
-        loading: { ...state.loading, mergeSortBottomUp: false },
+        loading: { ...state.loading, mergeSortBottomUp: false }
       });
     } catch (err) {
       console.error("Error sorting Merge Sort:", err);
       updateState({
         error: err.message,
-        loading: { ...state.loading, mergeSortBottomUp: false },
+        loading: { ...state.loading, mergeSortBottomUp: false }
       });
     }
   };
@@ -102,7 +109,7 @@ export default function MergeSortComparisonPage() {
   const handlemergeSortTopDown = async () => {
     updateState({
       error: null,
-      loading: { ...state.loading, mergeSortTopDown: true },
+      loading: { ...state.loading, mergeSortTopDown: true }
     });
 
     const payload = { values: state.numbers };
@@ -113,13 +120,13 @@ export default function MergeSortComparisonPage() {
       updateState({
         mergeSortTopDownSteps: steps,
         mergeSortTopDownSorted: steps.length > 0,
-        loading: { ...state.loading, mergeSortTopDown: false },
+        loading: { ...state.loading, mergeSortTopDown: false }
       });
     } catch (err) {
       console.error("Error sorting Merge Sort Two:", err);
       updateState({
         error: err.message,
-        loading: { ...state.loading, mergeSortTopDown: false },
+        loading: { ...state.loading, mergeSortTopDown: false }
       });
     }
   };
@@ -127,7 +134,7 @@ export default function MergeSortComparisonPage() {
   const handleInplaceMergeSort = async () => {
     updateState({
       error: null,
-      loading: { ...state.loading, inplaceMergeSort: true },
+      loading: { ...state.loading, inplaceMergeSort: true }
     });
 
     const payload = { values: state.numbers };
@@ -138,13 +145,13 @@ export default function MergeSortComparisonPage() {
       updateState({
         inplaceMergeSortSteps: steps,
         inplaceMergeSortSorted: steps.length > 0,
-        loading: { ...state.loading, inplaceMergeSort: false },
+        loading: { ...state.loading, inplaceMergeSort: false }
       });
     } catch (err) {
       console.error("Error sorting Merge Sort Two:", err);
       updateState({
         error: err.message,
-        loading: { ...state.loading, inplaceMergeSort: false },
+        loading: { ...state.loading, inplaceMergeSort: false }
       });
     }
   };
@@ -152,7 +159,7 @@ export default function MergeSortComparisonPage() {
   const handleTimSort = async () => {
     updateState({
       error: null,
-      loading: { ...state.loading, timSort: true },
+      loading: { ...state.loading, timSort: true }
     });
 
     const payload = { values: state.numbers };
@@ -163,13 +170,13 @@ export default function MergeSortComparisonPage() {
       updateState({
         timSortSteps: steps,
         timSortSorted: steps.length > 0,
-        loading: { ...state.loading, timSort: false },
+        loading: { ...state.loading, timSort: false }
       });
     } catch (err) {
       console.error("Error sorting Merge Sort Two:", err);
       updateState({
         error: err.message,
-        loading: { ...state.loading, timSortSorted: false },
+        loading: { ...state.loading, timSortSorted: false }
       });
     }
   };
@@ -177,7 +184,7 @@ export default function MergeSortComparisonPage() {
   const handleParallelMergeSort = async () => {
     updateState({
       error: null,
-      loading: { ...state.loading, parallelMergeSort: true },
+      loading: { ...state.loading, parallelMergeSort: true }
     });
 
     const payload = { values: state.numbers };
@@ -188,19 +195,25 @@ export default function MergeSortComparisonPage() {
       updateState({
         parallelMergeSortSteps: steps,
         parallelMergeSortSorted: steps.length > 0,
-        loading: { ...state.loading, mergeSortBottomUp: false },
+        loading: { ...state.loading, mergeSortBottomUp: false }
       });
     } catch (err) {
       console.error("Error sorting Merge Sort:", err);
       updateState({
         error: err.message,
-        loading: { ...state.loading, parallelMergeSort: false },
+        loading: { ...state.loading, parallelMergeSort: false }
       });
     }
   };
 
   const handleSortBoth = async () => {
-    await Promise.all([handleMergeSort(), handlemergeSortTopDown(), handleInplaceMergeSort(), handleTimSort(), handleParallelMergeSort()]);
+    await Promise.all([
+      handleMergeSort(),
+      handlemergeSortTopDown(),
+      handleInplaceMergeSort(),
+      handleTimSort(),
+      handleParallelMergeSort()
+    ]);
   };
 
   return (
@@ -274,8 +287,20 @@ export default function MergeSortComparisonPage() {
           <Box mt={4}>
             <Button
               onClick={handleSortBoth}
-              isLoading={state.loading.mergeSortBottomUp || state.loading.mergeSortTopDown || state.loading.inplaceMergeSort || state.loading.timSort || state.loading.parallelMergeSort}
-              isDisabled={state.loading.mergeSortBottomUp || state.loading.mergeSortTopDown || state.loading.inplaceMergeSort || state.loading.timSort || state.loading.parallelMergeSort}
+              isLoading={
+                state.loading.mergeSortBottomUp ||
+                state.loading.mergeSortTopDown ||
+                state.loading.inplaceMergeSort ||
+                state.loading.timSort ||
+                state.loading.parallelMergeSort
+              }
+              isDisabled={
+                state.loading.mergeSortBottomUp ||
+                state.loading.mergeSortTopDown ||
+                state.loading.inplaceMergeSort ||
+                state.loading.timSort ||
+                state.loading.parallelMergeSort
+              }
               colorScheme="blue"
               width="100%"
             >

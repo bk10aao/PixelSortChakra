@@ -15,8 +15,8 @@ export const timeComplexities = {
   "Radix Sort (MSD)": "O(nk)",
   "Selection Sort": "O(n²)",
   "Shell Sort": "O(n log n)",
-  "Tim Sort": "O(n log n)",
-  
+  "Tim Sort": "O(n log n)"
+
   // Add other algorithms as needed
 };
 
@@ -37,5 +37,5 @@ export const spaceComplexities = {
   "Radix Sort (MSD)": "O(n + k)",
   "Selection Sort": "O(1)",
   "Shell Sort": "O(1)",
-  "Tim Sort": "O(n)",
+  "Tim Sort": "O(n)"
 };

@@ -13,7 +13,7 @@ const AlgorithmTile = ({
   loading,
   isSortingAll,
   hasSortedAll,
-  height,
+  height
 }) => {
   return (
     <Box className="tile-box">
@@ -49,7 +49,7 @@ AlgorithmTile.propTypes = {
   loading: PropTypes.bool.isRequired,
   isSortingAll: PropTypes.bool.isRequired,
   hasSortedAll: PropTypes.bool.isRequired,
-  height: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired
 };
 
 export default AlgorithmTile;
