@@ -230,8 +230,8 @@ export default function MergeSortComparisonPage() {
           width="100%"
         />
         {state.error && (
-          <Alert status="error" w="100%" maxW="1440px">
-            <AlertIcon />
+          <Alert status="error" bg="red.900" color="gray.100" borderRadius="md">
+            <AlertIcon color="red.300" />
             {state.error}
           </Alert>
         )}
