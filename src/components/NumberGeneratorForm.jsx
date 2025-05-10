@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import {
     Button,
@@ -51,6 +52,13 @@ import {
         </VStack>
       </form>
     );
+  };
+
+  NumberGeneratorForm.propTypes = {
+    value: PropTypes.number.isRequired,
+    loading: PropTypes.bool.isRequired,
+    onValueChange: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
   };
   
   export default NumberGeneratorForm;
