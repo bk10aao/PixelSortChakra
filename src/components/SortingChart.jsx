@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { BarChart, Bar, Tooltip, ResponsiveContainer } from "recharts";
 import "../chart.css";
 
-const SortingChart = ({ steps, algorithm, isSorted, hgt, totalSteps }) => {
+const SortingChart = ({ steps, isSorted, hgt, totalSteps }) => {
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {

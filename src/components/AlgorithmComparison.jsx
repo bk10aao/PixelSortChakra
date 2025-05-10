@@ -52,16 +52,13 @@ const AlgorithmComparison = ({
     }
   };
 
-  // Retrieve the complexities for the selected algorithm
   const complexities = algorithmComplexities[algorithm] || {
     time: "N/A",
     space: "N/A"
   };
 
   return (
-    <Box p={1} borderWidth="1px" borderRadius="lg">
-      
-      {/* Display Time and Space Complexities */}
+    <Box>
       <VStack spacing={2} align="center" mt={4} color="white">
         <Heading className="tile-title" color={"white"} textStyle="xl" size={"sm"} textAlign="center">
           {algorithm}

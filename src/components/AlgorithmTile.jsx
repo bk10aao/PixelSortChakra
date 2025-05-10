@@ -30,7 +30,7 @@ const AlgorithmTile = ({
         isLoading={loading}
         isDisabled={isSortingAll || (hasSortedAll && isSorted)}
         className="tile-button"
-        colorScheme="blue" // RE-ADD this
+        colorScheme="blue"
       >
         Sort
       </Button>
