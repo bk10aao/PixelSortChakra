@@ -110,11 +110,11 @@ export default function SortPage({ algorithmName, sortFunction }) {
           width="100%"
         />
         {state.error && (
-                  <Alert status="error" bg="red.900" color="gray.100" borderRadius="md">
-                    <AlertIcon color="red.300" />
-                    {state.error}
-                  </Alert>
-                )}
+          <Alert status="error" bg="red.900" color="gray.100" borderRadius="md">
+            <AlertIcon color="red.300" />
+            {state.error}
+          </Alert>
+        )}
         {state.numbers.length > 0 && (
           <>
             {state.error && (
