@@ -105,7 +105,12 @@ export default function Algorithms() {
 
   useEffect(() => {
     if (state.showTiles && state.numbers.length > 0 && graphRef.current) {
-      graphRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      const navbarHeight = window.innerWidth >= 768 ? 60 : 80; // Match pt={{ base: "80px", md: "60px" }}
+      const elementPosition = graphRef.current.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - navbarHeight,
+        behavior: "smooth"
+      });
     }
   }, [state.showTiles, state.numbers]);
 
@@ -382,7 +387,7 @@ export default function Algorithms() {
   return (
     <Box p={6} pt={{ base: "80px", md: "60px" }} mx="auto" maxW="1600px">
       <VStack spacing={8} align="stretch">
-        <Heading as="h1" size="xl" textAlign="center" color="white" fontWeight="bold">
+        <Heading pt="60px" as="h1" size="xl" textAlign="center" color="white" fontWeight="bold">
           Sorting Algorithm Visualizer
         </Heading>
         <NumberGeneratorForm

@@ -94,7 +94,7 @@ SortingChart.propTypes = {
   steps: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
   isSorted: PropTypes.bool.isRequired,
   hgt: PropTypes.number.isRequired,
-  totalSteps: PropTypes.number.isRequired
+  totalSteps: PropTypes.number
 };
 
 export default SortingChart;

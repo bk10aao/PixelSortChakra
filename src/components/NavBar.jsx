@@ -35,6 +35,7 @@ const NavBar = () => {
       px={6}
       py={3}
       top={0}
+      position="fixed"
       width="100%"
       zIndex={10}
       borderBottom="2px"

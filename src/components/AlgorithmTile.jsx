@@ -44,9 +44,9 @@ AlgorithmTile.propTypes = {
   algorithm: PropTypes.string.isRequired,
   steps: PropTypes.arrayOf(PropTypes.any).isRequired,
   isSorted: PropTypes.bool.isRequired,
-  totalSteps: PropTypes.number.isRequired,
+  totalSteps: PropTypes.number,
   onSort: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
   isSortingAll: PropTypes.bool.isRequired,
   hasSortedAll: PropTypes.bool.isRequired,
   height: PropTypes.number.isRequired

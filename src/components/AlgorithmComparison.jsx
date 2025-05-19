@@ -110,7 +110,7 @@ AlgorithmComparison.propTypes = {
   isSortingAll: PropTypes.bool.isRequired,
   hasSortedAll: PropTypes.bool.isRequired,
   height: PropTypes.number.isRequired,
-  totalSteps: PropTypes.number.isRequired
+  totalSteps: PropTypes.number
 };
 
 export default AlgorithmComparison;

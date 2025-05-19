@@ -92,7 +92,7 @@ export default function SortPage({ algorithmName, sortFunction }) {
   return (
     <Box p={6} pt={{ base: "80px", md: "60px" }} mx="auto" maxW="1600px" bg="gray.800">
       <VStack spacing={8} align="stretch">
-        <Heading as="h1" size="xl" textAlign="center" color="white" fontWeight="bold">
+        <Heading pt="40px" as="h1" size="xl" textAlign="center" color="white" fontWeight="bold">
           {algorithmName} Visualizer
         </Heading>
         {/* Display Time Complexity */}
