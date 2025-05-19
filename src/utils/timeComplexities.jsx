@@ -16,8 +16,6 @@ export const timeComplexities = {
   "Selection Sort": "O(n²)",
   "Shell Sort": "O(n log n)",
   "Tim Sort": "O(n log n)"
-
-  // Add other algorithms as needed
 };
 
 export const spaceComplexities = {

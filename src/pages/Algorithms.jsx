@@ -105,7 +105,7 @@ export default function Algorithms() {
 
   useEffect(() => {
     if (state.showTiles && state.numbers.length > 0 && graphRef.current) {
-      const navbarHeight = window.innerWidth >= 768 ? 60 : 80; // Match pt={{ base: "80px", md: "60px" }}
+      const navbarHeight = window.innerWidth >= 768 ? 60 : 80;
       const elementPosition = graphRef.current.getBoundingClientRect().top + window.pageYOffset;
       window.scrollTo({
         top: elementPosition - navbarHeight,
