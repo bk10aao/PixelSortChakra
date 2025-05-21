@@ -93,7 +93,7 @@ export default function SortPage({ algorithmName, sortFunction }) {
     <Box p={6} pt={{ base: "80px", md: "60px" }} mx="auto" maxW="1600px" bg="gray.800">
       <VStack spacing={8} align="stretch">
         <Heading pt="40px" as="h1" size="xl" textAlign="center" color="white" fontWeight="bold">
-          {algorithmName} Visualizer
+          {algorithmName}
         </Heading>
         {/* Display Time Complexity */}
         <Tooltip label="Estimated time complexity of the selected algorithm" fontSize="md">

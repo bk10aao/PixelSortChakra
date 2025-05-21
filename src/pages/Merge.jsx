@@ -217,25 +217,25 @@ export default function MergeSortComparisonPage() {
   };
 
   return (
-    <Box p={4} pt={{ base: "40px", md: "30px" }} mx="auto" maxW="1440px">
-      <Heading as="h1" size="xl" mb={6} textAlign="center">
-        Comparing Merge Sort Algorithms
-      </Heading>
-      <VStack spacing={4} mb={8} w="100%" align="stretch">
-        <NumberGeneratorForm
-          value={state.value}
-          loading={state.loading.generate}
-          onValueChange={(val) => updateState({ value: val })}
-          onSubmit={handleGenerate}
-          width="100%"
-        />
-        {state.error && (
-          <Alert status="error" bg="red.900" color="gray.100" borderRadius="md">
-            <AlertIcon color="red.300" />
-            {state.error}
-          </Alert>
-        )}
-      </VStack>
+    <Box p={6} pt={{ base: "80px", md: "60px" }} mx="auto" maxW="1600px" bg="gray.800">
+        <Heading pt="40px" as="h1" size="xl" textAlign="center" color="white" fontWeight="bold" paddingBottom={"40px"}>
+          Merge Sort Algorithms
+        </Heading>
+        <VStack spacing={4} mb={8} w="100%" align="stretch">
+          <NumberGeneratorForm
+            value={state.value}
+            loading={state.loading.generate}
+            onValueChange={(val) => updateState({ value: val })}
+            onSubmit={handleGenerate}
+            width="100%"
+          />
+          {state.error && (
+            <Alert status="error" bg="red.900" color="gray.100" borderRadius="md">
+              <AlertIcon color="red.300" />
+              {state.error}
+            </Alert>
+          )}
+        </VStack>
       {state.showTiles && (
         <>
           <SimpleGrid columns={{ base: 1, md: 4 }} spacing={8} ref={graphRef}>
